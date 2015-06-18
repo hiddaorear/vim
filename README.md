@@ -14,5 +14,5 @@ vim vimrc
 卸载不在列表中的插件： :BundleClean"
 更多插件：http://vim-scripts.org/vim/scripts.html
 
-我用了YouCompleteMe自动补全插件，有些麻烦，官方指南：http://valloric.github.com/YouCompleteMe/
-也可参考我的博客：Git时代的VIM不完全使用教程
+含YouCompleteMe自动补全插件，官方指南：http://valloric.github.com/YouCompleteMe/
+也可参考原使用者的博客：Git时代的VIM不完全使用教程
