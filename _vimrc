@@ -106,62 +106,32 @@ set numberwidth=4          "行号栏的宽度
 set whichwrap=b,s,<,>,[,]  "让退格，空格，上下箭头遇到行首行尾时自动移到下一行（包括insert模式）
 
 "插入模式下移动
-imap <c-j> <down>
-imap <c-k> <up>
-imap <c-l> <right>
-imap <c-h> <left>
+imap <c-n> <down>
+imap <c-p> <up>
+imap <c-f> <right>
+imap <c-b> <left>
 
 "===================================================
 "修改leader键为逗号
 let mapleader=","
 imap jj <esc>
 
-"修改vim的正则表达
-nmap / /\v
-vmap / /\v
-
-"使用tab键来代替%进行匹配跳转
-nmap <tab> %
-vmap <tab> %
 
 "折叠html标签 ,fold tag
 nnoremap <leader>ft vatzf
 "使用,v来选择刚刚复制的段落，这样可以用来缩进
 nnoremap <leader>v v`]
 
-"使用,w来垂直分割窗口，这样可以同时查看多个文件,如果想水平分割则<c-w>s
-nmap <leader>w <c-w>v<c-w>l
-nmap <leader>wc <c-w>c
-nmap <leader>ww <c-w>w
 
-"tab切换
-nmap <leader>t gt
-nmap <leader>r gT
 
 "<leader>空格快速保存
 nmap <leader><space> :w<cr>
 
-"取消搜索高亮
-nmap <leader>n :noh<cr>
-
-"html中的js加注释 取消注释
-nmap <leader>h I//jj
-nmap <leader>ch ^xx
-"切换到当前目录
-nmap <leader>q :execute "cd" expand("%:h")<CR>
-"搜索替换
-nmap <leader>s :1,%s///cg<left><left><left><left>
 
 "取消粘贴缩进
 nmap <leader>p :set paste<CR>
 nmap <leader>pp :set nopaste<CR>
 
-"文件类型切换
-nmap <leader>fj :set ft=javascript<CR>
-nmap <leader>fc :set ft=css<CR>
-nmap <leader>fh :set ft=html<CR>
-nmap <leader>fm :set ft=mako<CR>
-nmap <leader>fs :set ft=swig<CR>
 
 "设置隐藏gvim的菜单和工具栏 F2切换
 set guioptions-=m
