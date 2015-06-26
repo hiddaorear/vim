@@ -129,8 +129,10 @@ nmap <leader><space> :w<cr>
 
 
 "取消粘贴缩进
-nmap <leader>p :set paste<CR>
-nmap <leader>pp :set nopaste<CR>
+"nmap <leader>p :set paste<CR>
+"nmap <leader>pp :set nopaste<CR>
+"共享剪切板
+set clipboard=unnamed
 
 
 "设置隐藏gvim的菜单和工具栏 F2切换
@@ -140,6 +142,7 @@ set guioptions-=T
 set go-=r
 set go-=L
 
+set wildmenu
 set nobackup
 
 syntax on
