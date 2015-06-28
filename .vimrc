@@ -1,6 +1,15 @@
-set nocompatible          "不要兼容vi
-filetype off              "必须的设置：
+"
+"@hiddaorear
+"2015-06-28
+"github:hiddaorear
+"
 
+"--init set begin---------------------
+set nocompatible             "不要兼容vi
+filetype off                 "必须的设置：
+"--init set end---------------------
+
+"--GUI set begin---------------------
 "Color Settings
 set colorcolumn=85           "彩色显示第85行
 set t_Co=256                 "设置256色显示
@@ -14,11 +23,24 @@ set backspace=indent,eol,start
 colorscheme evening
 color koehler
 
+"设置隐藏gvim的菜单和工具栏 F2切换
+set guioptions-=m
+set guioptions-=T
+"去除左右两边的滚动条
+set go-=r
+set go-=L
+
+set number                                    "显示行号
+"set relativenumber                            "相对行号 要想相对行号起作用要放在显示行号后面
+set numberwidth=4                             "行号栏的宽度
+"--GUI set end---------------------
+
+"--Language set begin---------------------
 "vim支持打开的文件编码
 set fileencodings=utf-8,ucs-bom,shift-jis,latin1,big5,gb18030,gbk,gb2312,cp936  "文件 UTF-8 编码
-" 解决显示界面乱码
+"解决显示界面乱码
 set fileencoding=utf-8
-set encoding=utf-8      "vim 内部编码
+set encoding=utf-8            "vim 内部编码
 set termencoding=utf-8
 set guifont=DejaVu\ Sans\ Mono\ 14
 
@@ -43,33 +65,22 @@ set hidden
 set noswapfile
 set nowritebackup
 "set encoding=utf-8
+"--Language set begin---------------------
 
-"set laststatus=2
-"set number                                    "显示行号
-"set undofile                                  "无限undo
-"set nowrap                                    "禁止自动换行
-"autocmd! bufwritepost _vimrc source %         "自动载入配置文件不需要重启
+"--deed set begin---------------------
+set laststatus=2
+set undofile                                  "无限undo
+autocmd! bufwritepost .vimrc source %         "自动载入配置文件不需要重启
 
-"相对行号 要想相对行号起作用要放在显示行号后面
-set relativenumber
-"自动换行
-set wrap
-"GUI界面里的字体，默认有抗锯齿
-"set guifont=Inconsolata:h14
-"将-连接符也设置为单词
-set isk+=-
+set wrap "自动换行
+set isk+=- "将-连接符也设置为单词
 
-set ignorecase "设置大小写敏感和聪明感知(小写全搜，大写完全匹配)
+set ignorecase                                "小写全搜，大写完全匹配
 set smartcase
 "set gdefault
 set incsearch
 set showmatch
 set hlsearch
-
-set numberwidth=4          "行号栏的宽度
-"set columns=135           "初始窗口的宽度
-"set lines=50              "初始窗口的高度
-"winpos 620 45             "初始窗口的位置
 
 set whichwrap=b,s,<,>,[,]  "让退格，空格，上下箭头遇到行首行尾时自动移到下一行（包括insert模式）
 
@@ -79,104 +90,12 @@ imap <c-p> <up>
 imap <c-f> <right>
 imap <c-b> <left>
 
-"===================================================
-"修改leader键为逗号
-let mapleader=","
-imap jj <esc>
-
-
-"折叠html标签 ,fold tag
-nnoremap <leader>ft vatzf
-"使用,v来选择刚刚复制的段落，这样可以用来缩进
-nnoremap <leader>v v`]
-
-
-
-"<leader>空格快速保存
-nmap <leader><space> :w<cr>
-
-
-"取消粘贴缩进
-"nmap <leader>p :set paste<CR>
-"nmap <leader>pp :set nopaste<CR>
-"共享剪切板
-set clipboard=unnamed
-
-
-"设置隐藏gvim的菜单和工具栏 F2切换
-set guioptions-=m
-set guioptions-=T
-"去除左右两边的滚动条
-set go-=r
-set go-=L
+set clipboard=unnamed        "共享剪切板
 
 set wildmenu
 set nobackup
 
+set wildmode=longest,list    "bash shell complete
+"--deed set end---------------------
 
-"Vundle Settings {
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-
-Bundle 'gmarik/vundle'
-Bundle "mattn/emmet-vim"
-Bundle 'Auto-Pairs'
-Bundle 'matchit.zip'
-Bundle 'trailing-whitespace'
-Bundle 'cakebaker/scss-syntax.vim'
-Bundle "pangloss/vim-javascript"
-Bundle "othree/html5.vim"
-Bundle "beiyuu/vim-bundle-mako"
-Bundle "ayang/AutoComplPop"
-Bundle "wavded/vim-stylus"
-Bundle "mxw/vim-jsx"
-Bundle "brettof86/vim-swigjs"
-
-Bundle 'junegunn/vim-easy-align'
-  vmap <Enter> <Plug>(EasyAlign)
-  nmap <Leader>a <Plug>(EasyAlign)
-
-Bundle "Solarized"
-  let g:solarized_termtrans  = 1
-  let g:solarized_termcolors = 256
-  let g:solarized_contrast   = "high"
-  let g:solarized_visibility = "high"
-
-Bundle "ervandew/supertab"
-  let g:SuperTabDefaultCompletionType = "<c-n>"
-
-Bundle 'ctrlp.vim'
-  let g:ctrlp_cmd = 'CtrlPMRU'
-  let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|site_packages\|venv'
-
-Bundle 'Lokaltog/vim-easymotion'
-  let g:EasyMotion_smartcase = 0
-  let g:EasyMotion_do_mapping = 0 " Disable default mappings
-  nmap s <Plug>(easymotion-s)
-  nmap S <Plug>(easymotion-s2)
-  map <Leader>j <Plug>(easymotion-j)
-  map <Leader>k <Plug>(easymotion-k)
-
-Bundle 'The-NERD-tree'
-  "设置相对行号
-  nmap <leader>nt :NERDTree<cr>:set rnu<cr>
-  let NERDTreeShowBookmarks=1
-  let NERDTreeShowFiles=1
-  let NERDTreeShowHidden=1
-  let NERDTreeIgnore=['\.$','\~$']
-  let NERDTreeShowLineNumbers=1
-  let NERDTreeWinPos=1
-
-Bundle 'The-NERD-Commenter'
-  let NERDShutUp=1
-  "支持单行和多行的选择，//格式
-  map <c-h> ,c<space>
-
-Bundle 'UltiSnips'
-  "let g:UltiSnipsExpandTrigger="<c-j>"
-  "let g:UltiSnipsJumpForwardTrigger="<c-j>"
-  "let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-
-"放置在Bundle的设置后，防止意外BUG
-filetype plugin indent on
 syntax on
