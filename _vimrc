@@ -29,9 +29,18 @@ function MyDiff()
 endfunction
 
 
-set nocompatible          "不要兼容vi
-filetype off              "必须的设置：
+"
+"@hiddaorear
+"2015-06-28
+"github:hiddaorear
+"
 
+"--init set begin---------------------
+set nocompatible             "不要兼容vi
+filetype off                 "必须的设置：
+"--init set end---------------------
+
+"--GUI set begin---------------------
 "Color Settings
 set colorcolumn=85           "彩色显示第85行
 set t_Co=256                 "设置256色显示
@@ -45,11 +54,24 @@ set backspace=indent,eol,start
 colorscheme evening
 color koehler
 
+"设置隐藏gvim的菜单和工具栏 F2切换
+set guioptions-=m
+set guioptions-=T
+"去除左右两边的滚动条
+set go-=r
+set go-=L
+
+set number                                    "显示行号
+"set relativenumber                            "相对行号 要想相对行号起作用要放在显示行号后面
+set numberwidth=4                             "行号栏的宽度
+"--GUI set end---------------------
+
+"--Language set begin---------------------
 "vim支持打开的文件编码
 set fileencodings=utf-8,ucs-bom,shift-jis,latin1,big5,gb18030,gbk,gb2312,cp936  "文件 UTF-8 编码
-" 解决显示界面乱码
+"解决显示界面乱码
 set fileencoding=utf-8
-set encoding=utf-8      "vim 内部编码
+set encoding=utf-8            "vim 内部编码
 set termencoding=utf-8
 set guifont=Courier\ New\:h14:cANSI
 set guifontwide=NSimsun\:h14
@@ -75,33 +97,22 @@ set hidden
 set noswapfile
 set nowritebackup
 "set encoding=utf-8
+"--Language set begin---------------------
 
-"set laststatus=2
-"set number                                    "显示行号
-"set undofile                                  "无限undo
-"set nowrap                                    "禁止自动换行
-"autocmd! bufwritepost _vimrc source %         "自动载入配置文件不需要重启
+"--deed set begin---------------------
+set laststatus=2
+set undofile                                  "无限undo
+autocmd! bufwritepost .vimrc source %         "自动载入配置文件不需要重启
 
-"相对行号 要想相对行号起作用要放在显示行号后面
-set relativenumber
-"自动换行
-set wrap
-"GUI界面里的字体，默认有抗锯齿
-"set guifont=Inconsolata:h14
-"将-连接符也设置为单词
-set isk+=-
+set wrap "自动换行
+set isk+=- "将-连接符也设置为单词
 
-set ignorecase "设置大小写敏感和聪明感知(小写全搜，大写完全匹配)
+set ignorecase                                "小写全搜，大写完全匹配
 set smartcase
 "set gdefault
 set incsearch
 set showmatch
 set hlsearch
-
-set numberwidth=4          "行号栏的宽度
-"set columns=135           "初始窗口的宽度
-"set lines=50              "初始窗口的高度
-"winpos 620 45             "初始窗口的位置
 
 set whichwrap=b,s,<,>,[,]  "让退格，空格，上下箭头遇到行首行尾时自动移到下一行（包括insert模式）
 
@@ -109,40 +120,19 @@ set whichwrap=b,s,<,>,[,]  "让退格，空格，上下箭头遇到行首行尾�
 imap <c-n> <down>
 imap <c-p> <up>
 imap <c-f> <right>
-imap <c-b> <left>
+imap <c-g> <left>
 
-"===================================================
-"修改leader键为逗号
-let mapleader=","
-imap jj <esc>
-
-
-"折叠html标签 ,fold tag
-nnoremap <leader>ft vatzf
-"使用,v来选择刚刚复制的段落，这样可以用来缩进
-nnoremap <leader>v v`]
-
-
-
-"<leader>空格快速保存
-nmap <leader><space> :w<cr>
-
-
-"取消粘贴缩进
-"nmap <leader>p :set paste<CR>
-"nmap <leader>pp :set nopaste<CR>
-"共享剪切板
-set clipboard=unnamed
-
-
-"设置隐藏gvim的菜单和工具栏 F2切换
-set guioptions-=m
-set guioptions-=T
-"去除左右两边的滚动条
-set go-=r
-set go-=L
+set clipboard=unnamed        "共享剪切板
 
 set wildmenu
-set nobackup
+
+"不保存临时文件
+set nobackup       " no backup files
+set noswapfile     " no swap files
+set nowritebackup  " only in case you don't want a backup file while editing
+set noundofile     " no undo files
+
+set wildmode=longest,list    "bash shell complete
+"--deed set end---------------------
 
 syntax on
