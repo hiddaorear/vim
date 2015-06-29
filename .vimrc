@@ -93,7 +93,12 @@ imap <c-b> <left>
 set clipboard=unnamed        "共享剪切板
 
 set wildmenu
-set nobackup
+
+"不保存临时文件
+set nobackup       " no backup files
+set noswapfile     " no swap files
+set nowritebackup  " only in case you don't want a backup file while editing
+set noundofile     " no undo files
 
 set wildmode=longest,list    "bash shell complete
 "--deed set end---------------------
