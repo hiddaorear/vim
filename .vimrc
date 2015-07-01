@@ -84,11 +84,9 @@ set hlsearch
 
 set whichwrap=b,s,<,>,[,]  "让退格，空格，上下箭头遇到行首行尾时自动移到下一行（包括insert模式）
 
-"插入模式下移动
-imap <c-n> <down>
-imap <c-p> <up>
-imap <c-f> <right>
-imap <c-b> <left>
+set complete+=k     "字典补全
+set nocompatible
+filetype plugin on  "上下文补全
 
 set clipboard=unnamed        "共享剪切板
 
