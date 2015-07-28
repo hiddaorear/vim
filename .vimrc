@@ -35,6 +35,9 @@ autocmd InsertEnter * :set norelativenumber number
 autocmd InsertLeave * :set relativenumber
 "set relativenumber                            "相对行号 要想相对行号起作用要放在显示行号后面
 set numberwidth=4                             "行号栏的宽度
+
+set list
+set listchars=tab:>-,trail:- "显示tab和空格
 "--GUI set end---------------------
 
 "--Language set begin---------------------
