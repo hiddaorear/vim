@@ -140,7 +140,7 @@ set wildmode=longest,list    "bash shell complete
 
 "关闭bell声音
 set noeb
-set vb
+
 "--deed set end---------------------
 
 syntax on
