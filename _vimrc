@@ -62,9 +62,9 @@ set go-=r
 set go-=L
 
 "set number                                    "显示行号
+"set relativenumber                            "相对行号 要想相对行号起作用要放在显示行号后面
 autocmd InsertEnter * :set norelativenumber number
 autocmd InsertLeave * :set relativenumber
-"set relativenumber                            "相对行号 要想相对行号起作用要放在显示行号后面
 set numberwidth=4                             "行号栏的宽度
 
 set list
@@ -137,6 +137,10 @@ set nowritebackup  " only in case you don't want a backup file while editing
 set noundofile     " no undo files
 
 set wildmode=longest,list    "bash shell complete
+
+"关闭bell声音
+set noeb
+set vb
 "--deed set end---------------------
 
 syntax on
