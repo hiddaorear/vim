@@ -112,7 +112,7 @@ autocmd! bufwritepost .vimrc source %         "自动载入配置文件不需要
 set wrap "自动换行
 set isk+=- "将-连接符也设置为单词
 
-set ignorecase                                "小写全搜，大写完全匹配
+"set ignorecase                                "小写全搜，大写完全匹配
 set smartcase
 "set gdefault
 set incsearch
