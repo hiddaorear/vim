@@ -12,6 +12,8 @@ filetype off                 "必须的设置：
 "--GUI set begin---------------------
 "Color Settings
 set colorcolumn=85           "彩色显示第85行
+set foldcolumn=3             "可视折叠线索
+set foldmethod=syntax        "代码逻辑折叠
 set t_Co=256                 "设置256色显示
 set background=dark          "使用color solarized
 set cursorline               "设置光标高亮显示
