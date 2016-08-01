@@ -43,8 +43,6 @@ filetype off                 "必须的设置：
 "--GUI set begin---------------------
 "Color Settings
 set colorcolumn=85           "彩色显示第85行
-set foldcolumn=3             "可视折叠线索
-set foldmethod=syntax        "代码逻辑折叠
 set t_Co=256                 "设置256色显示
 set background=dark          "使用color solarized
 set cursorline               "设置光标高亮显示
@@ -55,6 +53,17 @@ set ruler
 set backspace=indent,eol,start
 colorscheme evening
 color koehler
+
+"fold
+set foldenable
+set foldcolumn=3             "可视折叠线索
+set foldmethod=indent        "代码按缩进折叠
+set foldlevel=1
+nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc':'zo')<CR> "用空格键来开关折叠
+au BufWinEnter * silent! loadview
+au BufWinLeave * silent! mkview  "保存折叠
+
+
 
 "设置隐藏gvim的菜单和工具栏 F2切换
 set guioptions-=m
