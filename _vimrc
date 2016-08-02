@@ -44,15 +44,13 @@ filetype off                 "必须的设置：
 "Color Settings
 set colorcolumn=85           "彩色显示第85行
 set t_Co=256                 "设置256色显示
-set background=dark          "使用color solarized
 set cursorline               "设置光标高亮显示
 set cursorcolumn             "光标垂直高亮
 set mouse=a                  "鼠标滚动
 set ttyfast
 set ruler
 set backspace=indent,eol,start
-colorscheme evening
-color koehler
+colorscheme pablo
 
 "fold
 set foldenable
