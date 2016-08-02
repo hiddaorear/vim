@@ -13,15 +13,13 @@ filetype off                 "必须的设置：
 "Color Settings
 set colorcolumn=85           "彩色显示第85行
 set t_Co=256                 "设置256色显示
-set background=dark          "使用color solarized
 set cursorline               "设置光标高亮显示
 set cursorcolumn             "光标垂直高亮
 set mouse=a                  "鼠标滚动
 set ttyfast
 set ruler
 set backspace=indent,eol,start
-colorscheme evening
-color koehler
+colorscheme pablo
 
 "fold
 set foldenable
@@ -43,7 +41,7 @@ set go-=L
 autocmd InsertEnter * :set norelativenumber number
 autocmd InsertLeave * :set relativenumber
 "set relativenumber                            "相对行号 要想相对行号起作用要放在显示行号后面
-set numberwidth=4                             "行号栏的宽度
+set numberwidth=4                              "行号栏的宽度
 
 set list
 set listchars=tab:>-,trail:- "显示tab和空格
@@ -86,7 +84,7 @@ set laststatus=2
 set undofile                                  "无限undo
 autocmd! bufwritepost .vimrc source %         "自动载入配置文件不需要重启
 
-set wrap "自动换行
+set wrap   "自动换行
 set isk+=- "将-连接符也设置为单词
 
 "set ignorecase                                "小写全搜，大写完全匹配
