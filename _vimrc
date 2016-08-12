@@ -40,6 +40,9 @@ set nocompatible             "不要兼容vi
 filetype off                 "必须的设置：
 "--init set end---------------------
 
+"--Text------------------------------
+set linespace=6         "设置行距，避免linux下不能显示下划线
+
 "--GUI set begin---------------------
 "Color Settings
 set colorcolumn=85           "彩色显示第85行
