@@ -199,3 +199,21 @@ nmap <F8> :TagbarToggle<CR>
 " }}}
 
 " }}}}}
+
+
+
+" Function {{{{{
+
+" Remove trailing whitespace when writing a buffer, but not for diff files.
+function! RemoveTrailingWhitespace()
+    if &ft != "diff"
+        let b:curcol = col(".")
+        let b:curline = line(".")
+        silent! %s/\s\+$//
+        silent! %s/\(\s*\n\)\+\%$//
+        call cursor(b:curline, b:curcol)
+    endif
+endfunction
+autocmd BufWritePre * call RemoveTrailingWhitespace()
+
+" }}}}}
