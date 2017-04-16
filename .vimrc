@@ -1,110 +1,194 @@
 "
-"@hiddaorear
+"@Yifeng Wang
 "2015-06-28
 "github:hiddaorear
 "
 
-syn on
 
-" common conf {{
-set noeb
+" {{{{{
+
+" General {{{
 set nocompatible
-filetype off
-set ai
-set bs=2
-set showmatch
-
-
-set colorcolumn=85
-set t_Co=256
-set cursorline
-set cursorcolumn
-set mouse=a
-set ttyfast
-set ruler
-set backspace=indent,eol,start
-colorscheme pablo
-set linespace=6
-
-set foldenable
-set foldcolumn=3
-set foldmethod=syntax "indent
-set foldlevel=1
-nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc':'zo')<CR>
+set nobackup
 au BufWinEnter * silent! loadview
 au BufWinLeave * silent! mkview
+autocmd! bufwritepost .vimrc source %
+set autochdir
+set whichwrap=b,s,<,>,[,]
+set nobomb
+set clipboard=unnamed
+set winaltkeys=no
+set noeb " no error bells
+set ai " auto indent
+set bs=2 " 在insert模式下用退格键删除
+set showmatch " 设置匹配模式，例如输入左括号会匹配相应的右括号
+set isk+=- " 设置-为单词的一部分
+set incsearch " 关键字未输入完全即显示结果
+set ignorecase " 忽略大小写
+set smartcase " 如果有大写字母，则切换到大小写敏感查找
+" }}}
 
-set guioptions-=m
-set guioptions-=T
-set go-=r
-set go-=L
+
+" File {{{
+set nowritebackup  " only in case you don't want a backup file while editing
+set noundofile     " no undo files
+set autoread
+set undofile " 写入文件时自动保存撤销历史，重新编辑文件时，恢复撤销历史
+set hidden " 不自动保存，切换buffer时不被打断；autowriteall，自动保存
+set noswapfile
+" }}}
+
+
+" Lang & Encoding {{{
+set fileencodings=ucs-bom,utf-8,utf-16,gbk,big5,gb18030,latin1
+set encoding=utf-8
+set langmenu=en_US
+let $LANG = 'en_US.UTF-8'
+"language messages zh_CN.UTF-8
+" }}}
+
+
+" GUI {{{
+colorscheme Tomorrow-Night-Bright "torte solarized molokai phd ron evening pablo desert
+source $VIMRUNTIME/delmenu.vim
+source $VIMRUNTIME/menu.vim
+set cursorcolumn " 高亮显示光标所在的行和列
+set cursorline
+set hlsearch
 
 autocmd InsertEnter * :set norelativenumber number
 autocmd InsertLeave * :set relativenumber
 set numberwidth=4
 
-set list
-set listchars=tab:>-,trail:- 
+" 窗口大小
+"set lines=35 columns=140
+" 分割出来的窗口位于当前窗口下边/右边
+set splitbelow
+set splitright
 
-" coding {
-set fileencodings=utf-8,ucs-bom,shift-jis,latin1,big5,gb18030,gbk,gb2312,cp936
-set fenc=utf-8
-set fileencoding=utf-8
-set encoding=utf-8
-set termencoding=utf-8
-" }}
+"不显示工具/菜单栏
+set guioptions-=T
+set guioptions-=m
+set guioptions-=L
+set guioptions-=r
+set guioptions-=b
+" 使用内置 tab 样式而不是 gui
+set guioptions-=e
+set nolist
+set guifont=Monaco:h14
+set go-=r " 去除左右滚动条
+set go-=L
+set scrolloff=8 " 光标移动到buffer顶部或底部时，保持8行的距离
 
-" set the menu & the message to English {
-set langmenu=en_US
-let $LANG = 'en_US'
-source $VIMRUNTIME/delmenu.vim
-source $VIMRUNTIME/menu.vim
-" }
+set colorcolumn=85
+set t_Co=256 "terminal color,因terminal的vim只支持16色，设定vim使用256色
+set mouse=r " || a,非啊值则使用系统的标准选取、复制，使用Ctrl+c:w
+set ruler " 右下角显示状态说明，行号之类
+set linespace=6 " Number of pixel lines inserted between characters.
+set laststatus=2 " 总是显示状态行
+set list " 列表选项，显示行尾字符($)和未扩展标签(^I)，行尾空白
+set listchars=tab:>-,trail:-   " 未扩展标签显示为>-，行尾空白为-
 
-"tab setting {
+set wrap " 自动换行
+set cmdheight=1 " 命令行高度
+" }}}
+
+
+" Format {{{
+set autoindent
+set smartindent
+set expandtab
+set foldenable " 开始折叠
+set foldmethod=syntax
+set foldcolumn=3 " 折叠区域的宽度
+set foldlevel=1 " 折叠层数
+set foldlevelstart=99 " 打开文件默认不折叠
+nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc':'zo')<CR>   " 用空格开关折叠
+
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
-set expandtab
-autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4
-" }
 
-set scrolloff=3
-set autoindent
-set hidden
-
-set laststatus=2
-set undofile
-autocmd! bufwritepost .vimrc source %
-
-set wrap
-set isk+=-
-
-set ignorecase
-set smartcase
-set incsearch
-set showmatch
-set hlsearch
-set hls
-
-set whichwrap=b,s,<,>,[,]
-
-set complete+=k
-set nocompatible
-filetype plugin on
-
-set clipboard=unnamed
-
-set wildmenu
-
-set nobackup       " no backup files
-set noswapfile     " no swap files
-set nowritebackup  " only in case you don't want a backup file while editing
-set noundofile     " no undo files
-set autoread
-
-
-set wildmode=longest,list    "bash shell complete
-
+syn on
 syntax on
-" }}
+" }}}
+
+
+" Coding {{{
+set complete+=k
+set wildmenu " 命令模式下不全以菜单形式显示
+set wildmode=list:longest,full    "bash shell complete
+" }}}
+
+" }}}}}
+
+
+
+" {{{{{
+filetype off                  " required
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+Plugin 'vim-scripts/L9'
+
+"Plugin 'plasticboy/vim-markdown'
+Plugin 'scrooloose/nerdtree'
+Plugin 'w0rp/ale'
+Plugin 'kien/ctrlp.vim'
+Plugin 'majutsushi/tagbar'
+Plugin 'walm/jshint.vim'
+
+call vundle#end()
+filetype plugin indent on
+
+" }}}}}
+
+
+"Plugin {{{{{
+
+" ctrlp {{{
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'ra'
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
+
+" }}}
+
+" nerdtree {{{
+autocmd VimEnter * NERDTree
+let NERDTreeWinPos="right"
+let NERDTreeShowBookmarks=1
+" }}}
+
+" }}}}}
+
+
+
+" Function {{{{{
+
+" Remove trailing whitespace when writing a buffer, but not for diff files.
+function! RemoveTrailingWhitespace()
+    if &ft != "diff"
+        let b:curcol = col(".")
+        let b:curline = line(".")
+        silent! %s/\s\+$//
+        silent! %s/\(\s*\n\)\+\%$//
+        call cursor(b:curline, b:curcol)
+    endif
+endfunction
+autocmd BufWritePre * call RemoveTrailingWhitespace()
+
+" }}}}}
