@@ -4,14 +4,12 @@
 "github:hiddaorear
 "
 
-
 " {{{{{
 
 " General {{{
 set nocompatible
-set nobackup
-au BufWinEnter * silent! loadview
-au BufWinLeave * silent! mkview
+"au BufWinEnter * silent! loadview
+"au BufWinLeave * silent! mkview
 autocmd! bufwritepost .vimrc source %
 set autochdir
 set whichwrap=b,s,<,>,[,]
@@ -32,10 +30,10 @@ set smartcase " 如果有大写字母，则切换到大小写敏感查找
 " File {{{
 set nowritebackup  " only in case you don't want a backup file while editing
 set noundofile     " no undo files
-set autoread
-set undofile " 写入文件时自动保存撤销历史，重新编辑文件时，恢复撤销历史
-set hidden " 不自动保存，切换buffer时不被打断；autowriteall，自动保存
+set nobackup
 set noswapfile
+set autoread
+set hidden " 不自动保存，切换buffer时不被打断；autowriteall，自动保存
 " }}}
 
 
@@ -142,7 +140,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'w0rp/ale'
 Plugin 'kien/ctrlp.vim'
 Plugin 'majutsushi/tagbar'
-Plugin 'walm/jshint.vim'
+"Plugin 'walm/jshint.vim'
 
 call vundle#end()
 filetype plugin indent on
