@@ -82,7 +82,7 @@ set scrolloff=8 " 光标移动到buffer顶部或底部时，保持8行的距离
 
 set colorcolumn=85
 set t_Co=256 "terminal color,因terminal的vim只支持16色，设定vim使用256色
-set mouse=r " || a,非啊值则使用系统的标准选取、复制，使用Ctrl+c:w
+set mouse=a " || a,非a值则使用系统的标准选取、复制，使用Ctrl+c:w
 set ruler " 右下角显示状态说明，行号之类
 set linespace=6 " Number of pixel lines inserted between characters.
 set laststatus=2 " 总是显示状态行
