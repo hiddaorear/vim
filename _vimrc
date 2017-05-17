@@ -10,8 +10,8 @@
 set nocompatible
 "au BufWinEnter * silent! loadview
 "au BufWinLeave * silent! mkview
-autocmd! bufwritepost .vimrc source %
-set autochdir
+"autocmd! bufwritepost .vimrc source %
+"set autochdir
 set whichwrap=b,s,<,>,[,]
 set nobomb
 set clipboard=unnamed
@@ -137,15 +137,17 @@ Plugin 'vim-scripts/L9'
 
 "Plugin 'plasticboy/vim-markdown'
 Plugin 'scrooloose/nerdtree'
-Plugin 'w0rp/ale'
 Plugin 'kien/ctrlp.vim'
-Plugin 'majutsushi/tagbar'
-"Plugin 'walm/jshint.vim'
+Plugin 'ggVGc/vim-fuzzysearch'
+Plugin 'godlygeek/tabular'
+
+
 
 call vundle#end()
 filetype plugin indent on
 
 " }}}}}
+
 
 
 "Plugin {{{{{
@@ -155,30 +157,44 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 
 map <leader>f :CtrlPMRU<CR>
-let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
-    \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
-    \ }
+let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|ico|git|svn))$'
+
+
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
 
-let g:ctrlp_working_path_mode=0
+
+let g:ctrlp_working_path_mode = 'rw' 
 let g:ctrlp_match_window_bottom=1
-let g:ctrlp_max_height=15
+let g:ctrlp_max_height=150
 let g:ctrlp_match_window_reversed=0
 let g:ctrlp_mruf_max=500
 let g:ctrlp_follow_symlinks=1
 
+let g:ctrlp_max_depth = 40
+"let g:ctrlp_max_files = 0
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:100'
+" search by file name
+let g:ctrlp_by_filename = 1
 " }}}
 
 " nerdtree {{{
 autocmd VimEnter * NERDTree
 let NERDTreeWinPos="right"
 let NERDTreeShowBookmarks=1
+let g:NERDTreeChDirMode = 2 
 " }}}
 
-" }}}}}
+" FuzzySearch {{{
+let g:fuzzysearch_prompt = 'fuzzy /'
+let g:fuzzysearch_hlsearch = 1
+let g:fuzzysearch_ignorecase = 1
+let g:fuzzysearch_max_history = 30
+let g:fuzzysearch_match_spaces = 0
+" }}}
 
+
+" }}}}}
 
 
 " Function {{{{{
