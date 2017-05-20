@@ -134,8 +134,6 @@ call vundle#begin(path)
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'vim-scripts/L9'
-
-"Plugin 'plasticboy/vim-markdown'
 Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
 Plugin 'ggVGc/vim-fuzzysearch'
@@ -164,7 +162,7 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
 
 
-let g:ctrlp_working_path_mode = 'rw' 
+let g:ctrlp_working_path_mode = 'rw'
 let g:ctrlp_match_window_bottom=1
 let g:ctrlp_max_height=150
 let g:ctrlp_match_window_reversed=0
@@ -182,7 +180,7 @@ let g:ctrlp_by_filename = 1
 autocmd VimEnter * NERDTree
 let NERDTreeWinPos="right"
 let NERDTreeShowBookmarks=1
-let g:NERDTreeChDirMode = 2 
+let g:NERDTreeChDirMode = 2
 " }}}
 
 " FuzzySearch {{{
