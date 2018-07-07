@@ -47,7 +47,8 @@ let $LANG = 'en_US.UTF-8'
 
 
 " GUI {{{
-colorscheme Tomorrow-Night-Bright "torte solarized molokai phd ron evening pablo desert
+set background=light
+colorscheme solarized "torte solarized molokai phd ron evening pablo desert
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
 set cursorcolumn " 高亮显示光标所在的行和列
@@ -125,21 +126,19 @@ set wildmode=list:longest,full    "bash shell complete
 " {{{{{
 filetype off                  " required
 
-set rtp+=$VIM/vimfiles/bundle/Vundle.vim/
-let path='$VIM/Vimfiles/bundle'
-call vundle#begin(path)
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'vim-scripts/L9'
-Plugin 'scrooloose/nerdtree'
+" Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
 Plugin 'ggVGc/vim-fuzzysearch'
 Plugin 'godlygeek/tabular'
-
-
+Plugin 'easymotion/vim-easymotion'
 
 call vundle#end()
 filetype plugin indent on
@@ -177,10 +176,10 @@ let g:ctrlp_by_filename = 1
 " }}}
 
 " nerdtree {{{
-autocmd VimEnter * NERDTree
-let NERDTreeWinPos="right"
-let NERDTreeShowBookmarks=1
-let g:NERDTreeChDirMode = 2
+"autocmd VimEnter * NERDTree
+"let NERDTreeWinPos="right"
+"let NERDTreeShowBookmarks=1
+"let g:NERDTreeChDirMode = 2
 " }}}
 
 " FuzzySearch {{{
@@ -190,6 +189,25 @@ let g:fuzzysearch_ignorecase = 1
 let g:fuzzysearch_max_history = 30
 let g:fuzzysearch_match_spaces = 0
 " }}}
+
+
+" easymotion {{{
+" 更改快捷键
+map f <Plug>(easymotion-prefix)
+map ff <Plug>(easymotion-s2)
+map fs <Plug>(easymotion-s)
+map fs <Plug>(easymotion-f)
+map fl <Plug>(easymotion-lineforward)
+map fj <Plug>(easymotion-j)
+map fk <Plug>(easymotion-k)
+map fh <Plug>(easymotion-linebackward)
+map ft <Plug>(easymotion-t2)
+" 忽略大小写
+let g:EasyMotion_smartcase = 1
+" }}}
+
+
+
 
 
 " }}}}}
