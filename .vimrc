@@ -57,7 +57,7 @@ set hlsearch
 
 autocmd InsertEnter * :set norelativenumber number
 autocmd InsertLeave * :set relativenumber
-set numberwidth=4
+set numberwidth=3
 
 " 窗口大小
 "set lines=35 columns=140
@@ -83,7 +83,7 @@ set colorcolumn=85
 set t_Co=256 "terminal color,因terminal的vim只支持16色，设定vim使用256色
 set mouse=a " || a,非a值则使用系统的标准选取、复制，使用Ctrl+c:w
 set ruler " 右下角显示状态说明，行号之类
-set linespace=6 " Number of pixel lines inserted between characters.
+set linespace=0 " Number of pixel lines inserted between characters.
 set laststatus=2 " 总是显示状态行
 set list " 列表选项，显示行尾字符($)和未扩展标签(^I)，行尾空白
 set listchars=tab:>-,trail:-   " 未扩展标签显示为>-，行尾空白为-
@@ -105,7 +105,7 @@ set foldlevelstart=99 " 打开文件默认不折叠
 nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc':'zo')<CR>   " 用空格开关折叠
 
 set tabstop=4
-set shiftwidth=4
+set shiftwidth=3
 set softtabstop=4
 
 syn on
@@ -134,7 +134,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'vim-scripts/L9'
-" Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
 Plugin 'ggVGc/vim-fuzzysearch'
 Plugin 'godlygeek/tabular'
@@ -177,10 +177,21 @@ let g:ctrlp_by_filename = 1
 
 " nerdtree {{{
 "autocmd VimEnter * NERDTree
-"let NERDTreeWinPos="right"
-"let NERDTreeShowBookmarks=1
-"let g:NERDTreeChDirMode = 2
+map <F3> :NERDTreeToggle<CR>
+let NERDTreeWinPos="right"
+let NERDTreeShowBookmarks=1
+let g:NERDTreeChDirMode = 2
 " }}}
+
+"" netrw {{{
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 25
+" }}}
+
+
 
 " FuzzySearch {{{
 let g:fuzzysearch_prompt = 'fuzzy /'
@@ -205,10 +216,6 @@ map ft <Plug>(easymotion-t2)
 " 忽略大小写
 let g:EasyMotion_smartcase = 1
 " }}}
-
-
-
-
 
 " }}}}}
 
