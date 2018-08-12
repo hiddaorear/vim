@@ -4,13 +4,12 @@
 
 ### ctrlp(路径以及文件名)
 
-按键绑定:
-Ctrl-p
+按键绑定: Ctrl-p
 
 提示面板操作:
-0. tab: 自动补全提示面板中的当前工作路径的目录名
-1. ctrl-d: 全路径搜索和文件名搜索间切换。文件名搜索模式的提示符是'>d>'，而非'>>>'
-2. ctrl-r: 字符串搜索和正则搜索切换。正则模式提示符是'r>>'，而不是'>>>'
+1. tab: 自动补全提示面板中的当前工作路径的目录名
+2. ctrl-d: 全路径搜索和文件名搜索间切换。文件名搜索模式的提示符是'>d>'，而非'>>>'
+3. ctrl-r: 字符串搜索和正则搜索切换。正则模式提示符是'r>>'，而不是'>>>'
 
 选择搜索结果:
 1. ctrl-j ctrl-k: 向下与向上移动
@@ -26,12 +25,12 @@ Ctrl-p
 4. ctrl-s: 水平分割窗口
 
 ### Explore
-1. Enter当前窗口打开文件，o新建窗口打开文件
-2. R 重命名
-3. D 删除
-4. / 文件列表查找
-5. gf 打开光标所在的文件名对应的文件
-6. Ctrl-Wf 在新的分割窗口打开光标下文件
+1. Enter:当前窗口打开文件，o:新建窗口打开文件
+2. R:重命名
+3. D:删除
+4. /: 文件列表查找
+5. gf: 打开光标所在的文件名对应的文件
+6. Ctrl-Wf: 在新的分割窗口打开光标下文件
 7. := 文件的总行数
 
 ### nerdtree
@@ -43,18 +42,18 @@ Ctrl-p
 ### ag.vim(文件中的字符串)
 
 usage:
-: Ag [options]{pattern}[{directory}]
+1. : Ag [options]{pattern}[{directory}]
 
 quickfix window:
-o: to open(same as enter)
-go: to preview file(open but maintain focus on ag.vim results)
-t: to open in new tab
-T: to open in new tab silently
-h: to open in horizontal split
-H: to open in horizontal split silently
-v: to open in vertical split silently
-gv: to open in vertical split silently
-q: to close the quickfix window
+1. o: to open(same as enter)
+2. go: to preview file(open but maintain focus on ag.vim results)
+3. t: to open in new tab
+4. T: to open in new tab silently
+5. h: to open in horizontal split
+6. H: to open in horizontal split silently
+7. v: to open in vertical split silently
+8. gv: to open in vertical split silently
+9. q: to close the quickfix window
 
 ## 修改的历史中搜索
 
@@ -80,4 +79,7 @@ q: to close the quickfix window
 2. w:保存文件
 
 # 其他
-## vim和shell切换：Ctrl-z vim后台运行，跳转到shell，在shell输入fg，切回vim
+1. vim和shell切换：Ctrl-z vim后台运行，跳转到shell，在shell输入fg，切回vim
+
+# 插件依赖
+1. ag
