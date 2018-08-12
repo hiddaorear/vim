@@ -123,7 +123,6 @@ set wildmode=list:longest,full    "bash shell complete
 " Leader {{{
 let mapleader = "\<Space>"
 nnoremap <Leader>w :w<CR>1
-nmap <Leader><Leader> i
 " }}}
 
 
@@ -149,12 +148,11 @@ Plugin 'scrooloose/nerdtree'
 " SEARCH
 Plugin 'rking/ag.vim'
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'ggVGc/vim-fuzzysearch'
-Plugin 'godlygeek/tabular'
 
 " EDITOR
 Plugin 'easymotion/vim-easymotion'
 Plugin 'mbbill/undotree'
+Plugin 'ervandew/supertab'
 
 " CODING
 Plugin 'vim-syntastic/syntastic'
@@ -284,16 +282,6 @@ let g:netrw_winsize = 25
 " }}}
 
 
-
-"SEATCH  ggVGc/vim-fuzzysearch {{{
-let g:fuzzysearch_prompt = 'fuzzy /'
-let g:fuzzysearch_hlsearch = 1
-let g:fuzzysearch_ignorecase = 1
-let g:fuzzysearch_max_history = 30
-let g:fuzzysearch_match_spaces = 0
-" }}}
-
-
 " CODING scrooloose/syntastic {{{
 let g:syntastic_error_symbol = '✗'	"set error or warning signs
 let g:syntastic_warning_symbol = '⚠'
@@ -345,7 +333,7 @@ if has("persistent_undo")
 endif
 " }}}
 
-"EDITOR  easymotion {{{
+"EDITOR easymotion/vim-easymotion {{{
 " 更改快捷键
 map f <Plug>(easymotion-prefix)
 map ff <Plug>(easymotion-s2)
