@@ -37,6 +37,7 @@
 自定义按键绑定: F3
 
 
+
 ## 字符串全局搜索
 
 ### ag.vim(文件中的字符串)
@@ -69,10 +70,38 @@ quickfix window:
 ### easymotion/vim-easymotion
 自定义按键绑定: prefix为f，ff为easymotion-s2，根据两个字符搜索定位，大部分场景下能快速定位
 
+## 根据changelist定位
+1. `g;`和`g,`在changelist中来回跳转
+
+## 根据jumplist定位
+1. ctrl-o ctrl-i在jumplist中来回跳转
+2. ctrl-O ctrl-I在文件中trace光标
+
+## 文本搜索
+1. gd比`/`与`?`更方便
+
 # 快速编辑
 
 ## ervandew/supertab(tab键补全)
 
+## Instert模式
+1. ctrl-d，ctrl-t 左右缩进
+2. ctrl-w 删除
+3. ctrl-u 重新编辑
+
+## 文件操作
+1. `:f filename`重命名当前文件
+
+# 快速浏览
+
+## 分割窗口
+1. Sex: 分割窗口
+
+## 折叠
+1. zc:折叠，zC:递归折叠
+2. zo:取消折叠，zO:递归取消
+3. zM:折叠全文件
+4. zR:取消全文件折叠
 
 # Leader键绑定
 1. leader键为空格
