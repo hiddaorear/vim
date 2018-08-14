@@ -141,6 +141,8 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'luochen1990/rainbow'
 Plugin 'Yggdroot/indentLine'
+Plugin 'severin-lemaignan/vim-minimap'
+Plugin 'kshenoy/vim-signature'
 
 " FILE
 Plugin 'scrooloose/nerdtree'
@@ -154,7 +156,6 @@ Plugin 'easymotion/vim-easymotion'
 Plugin 'mbbill/undotree'
 Plugin 'ervandew/supertab'
 Plugin 'junegunn/goyo.vim'
-Plugin 'severin-lemaignan/vim-minimap'
 
 " CODING
 Plugin 'vim-syntastic/syntastic'
@@ -204,7 +205,7 @@ let g:rainbow_conf = {
 
 "UI Yggdroot/indentLine {{{
 let g:indentLine_setColors = 0
-"let g:indentLine_char = '|'
+let g:indentLine_char = '|'
 " Vim
 let g:indentLine_color_term = 239
 
@@ -336,7 +337,7 @@ endif
 
 
 
-"EDTOR severin-lemaignan/vim-minimap {{{
+"UI severin-lemaignan/vim-minimap {{{
 let g:minimap_show='<leader>ms'
 let g:minimap_update='<leader>mu'
 let g:minimap_close='<leader>gc'
