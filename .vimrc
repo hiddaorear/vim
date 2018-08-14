@@ -153,6 +153,8 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'mbbill/undotree'
 Plugin 'ervandew/supertab'
+Plugin 'junegunn/goyo.vim'
+Plugin 'severin-lemaignan/vim-minimap'
 
 " CODING
 Plugin 'vim-syntastic/syntastic'
@@ -298,7 +300,6 @@ let g:javascript_plugin_flow = 1
 set foldmethod=syntax
 let g:javascript_conceal_function             = "ƒ"
 let g:javascript_conceal_null                 = "ø"
-let g:javascript_conceal_arrow_function       = "⇒"
 " }}}
 
 "JavaScript  maksimr/vim-jsbeautify {{{
@@ -332,6 +333,18 @@ if has("persistent_undo")
     set undofile
 endif
 " }}}
+
+
+
+"EDTOR severin-lemaignan/vim-minimap {{{
+let g:minimap_show='<leader>ms'
+let g:minimap_update='<leader>mu'
+let g:minimap_close='<leader>gc'
+let g:minimap_toggle='<leader>gt'
+let g:minimap_highlight='Visual'
+" }}}
+
+
 
 "EDITOR easymotion/vim-easymotion {{{
 " 更改快捷键

@@ -120,12 +120,26 @@ quickfix window:
 3. zM:折叠全文件
 4. zR:取消全文件折叠
 
+## severin-lemaignan/vim-minimap
+自定义按键绑定：
+
+```
+let g:minimap_show='<leader>ms'
+let g:minimap_update='<leader>mu'
+let g:minimap_close='<leader>gc'
+let g:minimap_toggle='<leader>gt'et g:minimap_show='<leader>ms'
+let g:minimap_update='<leader>mu'
+let g:minimap_close='<leader>gc'
+let g:minimap_toggle='<leader>gt'
+```
+
 # Leader键绑定
 1. leader键为空格
 2. w:保存文件
 
 # 其他
 1. vim和shell切换：Ctrl-z vim后台运行，跳转到shell，在shell输入fg，切回vim
+2. junegunn/goyo.vim 沉浸模式
 
 # 插件依赖
 1. ag
