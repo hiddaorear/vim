@@ -6,14 +6,15 @@
 
 " {{{{{
 syn on
-syntax on
-
+syntax on " 打开语法高亮
+set nocompatible " 不与 Vi 兼容
 " General {{{
-set nocompatible
 "au BufWinEnter * silent! loadview
 "au BufWinLeave * silent! mkview
 "autocmd! bufwritepost .vimrc source %
-"set autochdir
+set autochdir " 自动切换工作目录
+set showmode " 底部显示插入模式还是命令模式
+set showcmd " 显示当前键入的指令
 set whichwrap=b,s,<,>,[,]
 set nobomb
 set clipboard=unnamed
@@ -26,6 +27,9 @@ set isk+=- " 设置-为单词的一部分
 set incsearch " 关键字未输入完全即显示结果
 set ignorecase " 忽略大小写
 set smartcase " 如果有大写字母，则切换到大小写敏感查找
+set noerrorbells " 忽略出错响声
+set visualbell " 出错时视觉提示，屏幕闪烁
+set history=1000 " vim记住历史操作次数
 " }}}
 
 
@@ -34,7 +38,7 @@ set nowritebackup  " only in case you don't want a backup file while editing
 set noundofile     " no undo files
 set nobackup
 set noswapfile
-set autoread
+set autoread " 编辑过程中，文件发生外部改变，提示之
 set hidden " 不自动保存，切换buffer时不被打断；autowriteall，自动保存
 " }}}
 
@@ -49,7 +53,7 @@ let $LANG = 'en_US.UTF-8'
 
 " GUI {{{
 set background=light
-colorscheme onedark  "solarized torte solarized molokai phd ron evening pablo desert
+colorscheme  onedark " solarized torte solarized molokai phd ron evening pablo desert
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
 set cursorcolumn " 高亮显示光标所在的行和列
@@ -74,7 +78,6 @@ set guioptions-=r
 set guioptions-=b
 " 使用内置 tab 样式而不是 gui
 set guioptions-=e
-set nolist
 set guifont=Monaco:h16
 set go-=r " 去除左右滚动条
 set go-=L
@@ -87,9 +90,10 @@ set ruler " 右下角显示状态说明，行号之类
 set linespace=2 " Number of pixel lines inserted between characters.
 set laststatus=2 " 总是显示状态行
 set list " 列表选项，显示行尾字符($)和未扩展标签(^I)，行尾空白
-set listchars=tab:>-,trail:-   " 未扩展标签显示为>-，行尾空白为-
+set listchars=tab:»■,trail:■ " 多余行尾空格，显示为可见的小方块
 
 set wrap " 自动换行
+set wrapmargin=2 " 折行处与编辑窗口右边缘之间空出的字符数
 set cmdheight=1 " 命令行高度
 " }}}
 
@@ -100,7 +104,7 @@ set smartindent
 set expandtab
 set foldenable " 开始折叠
 set foldmethod=syntax
-set foldcolumn=3 " 折叠区域的宽度
+set foldcolumn=0 " 折叠区域的宽度
 set foldlevel=1 " 折叠层数
 set foldlevelstart=99 " 打开文件默认不折叠
 nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc':'zo')<CR>   " 用空格开关折叠
@@ -204,21 +208,21 @@ let g:rainbow_conf = {
 
 
 "UI Yggdroot/indentLine {{{
-let g:indentLine_setColors = 0
-let g:indentLine_char = '|'
+"let g:indentLine_setColors = 0
+" let g:indentLine_char = '|'
 " Vim
 let g:indentLine_color_term = 239
 
 " GVim
-let g:indentLine_color_gui = '#A4E57E'
+let g:indentLine_color_gui = '#E4E4E4'
 
 " none X terminal
 let g:indentLine_color_tty_light = 7 " (default: 4)
 let g:indentLine_color_dark = 1 " (default: 2)
 
 " Background (Vim, GVim)
-let g:indentLine_bgcolor_term = 202
-let g:indentLine_bgcolor_gui = '#FF5F00'
+"let g:indentLine_bgcolor_term = 202
+"let g:indentLine_bgcolor_gui = '#FFFFFF'
 " }}}
 
 "SEARCH  rking/ag.vim {{{
@@ -299,8 +303,8 @@ let g:javascript_plugin_jsdoc = 1
 let g:javascript_plugin_ngdoc = 1
 let g:javascript_plugin_flow = 1
 set foldmethod=syntax
-let g:javascript_conceal_function             = "ƒ"
-let g:javascript_conceal_null                 = "ø"
+"let g:javascript_conceal_function             = "ƒ"
+"let g:javascript_conceal_null                 = "ø"
 " }}}
 
 "JavaScript  maksimr/vim-jsbeautify {{{
