@@ -53,7 +53,7 @@ let $LANG = 'en_US.UTF-8'
 
 " GUI {{{
 set background=light
-colorscheme  onedark " solarized torte solarized molokai phd ron evening pablo desert
+colorscheme  solarized "  torte solarized molokai phd ron evening pablo desert
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
 set cursorcolumn " 高亮显示光标所在的行和列
@@ -144,7 +144,6 @@ Plugin 'VundleVim/Vundle.vim'
 " UI
 Plugin 'flazz/vim-colorschemes'
 Plugin 'luochen1990/rainbow'
-Plugin 'Yggdroot/indentLine'
 Plugin 'severin-lemaignan/vim-minimap'
 Plugin 'kshenoy/vim-signature'
 Plugin 'liuchengxu/vim-which-key'
@@ -281,24 +280,6 @@ let g:rainbow_conf = {
 	\}
 " }}}
 
-
-"UI Yggdroot/indentLine {{{
-"let g:indentLine_setColors = 0
-" let g:indentLine_char = '|'
-" Vim
-let g:indentLine_color_term = 239
-
-" GVim
-let g:indentLine_color_gui = '#E4E4E4'
-
-" none X terminal
-let g:indentLine_color_tty_light = 7 " (default: 4)
-let g:indentLine_color_dark = 1 " (default: 2)
-
-" Background (Vim, GVim)
-"let g:indentLine_bgcolor_term = 202
-"let g:indentLine_bgcolor_gui = '#FFFFFF'
-" }}}
 
 "SEARCH  rking/ag.vim {{{
 "let g:ag_prg="<custom-ag-path-goes-here> --vimgrep"
