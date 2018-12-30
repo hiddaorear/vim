@@ -54,6 +54,23 @@ let $LANG = 'en_US.UTF-8'
 " GUI {{{
 set background=light
 colorscheme  solarized "  torte solarized molokai phd ron evening pablo desert
+
+" 设置标记一列的背景颜色和数字一行颜色一致
+hi! link SignColumn   LineNr
+hi! link ShowMarksHLl DiffAdd
+hi! link ShowMarksHLu DiffChange
+
+" for error highlight，防止错误整行标红导致看不清
+highlight clear SpellBad
+highlight SpellBad term=standout ctermfg=1 term=underline cterm=underline
+highlight clear SpellCap
+highlight SpellCap term=underline cterm=underline
+highlight clear SpellRare
+highlight SpellRare term=underline cterm=underline
+highlight clear SpellLocal
+highlight SpellLocal term=underline cterm=underline
+
+
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
 set cursorcolumn " 高亮显示光标所在的行和列
@@ -132,52 +149,50 @@ nnoremap <Leader>w :w<CR>1
 
 
 " {{{{{
-filetype off                  " required
-
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+" Specify a directory for plugins
+" - For Neovim: ~/.local/share/nvim/plugged
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
 
 " UI
-Plugin 'flazz/vim-colorschemes'
-Plugin 'luochen1990/rainbow'
-Plugin 'severin-lemaignan/vim-minimap'
-Plugin 'kshenoy/vim-signature'
-Plugin 'liuchengxu/vim-which-key'
+Plug 'flazz/vim-colorschemes'
+Plug 'luochen1990/rainbow'
+Plug 'severin-lemaignan/vim-minimap'
+Plug 'kshenoy/vim-signature'
+Plug 'liuchengxu/vim-which-key'
 
 " FILE
-Plugin 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree'
 
 " SEARCH
-Plugin 'rking/ag.vim'
-Plugin 'ctrlpvim/ctrlp.vim'
+Plug 'rking/ag.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 
 " EDITOR
-Plugin 'easymotion/vim-easymotion'
-Plugin 'mbbill/undotree'
-Plugin 'ervandew/supertab'
-Plugin 'junegunn/goyo.vim'
+Plug 'easymotion/vim-easymotion'
+Plug 'mbbill/undotree'
+Plug 'junegunn/goyo.vim'
 
 " CODING
-Plugin 'vim-syntastic/syntastic'
-Plugin 'vim-scripts/gitignore'
+Plug 'vim-syntastic/syntastic'
+Plug 'prabirshrestha/asyncomplete.vim'
 
 " JavaScript
-Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
-Plugin 'maksimr/vim-jsbeautify'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'maksimr/vim-jsbeautify'
 
-call vundle#end()
-filetype plugin indent on
+" mode
+Plug 'jceb/vim-orgmode' " org-mode
+Plug 'tpope/vim-speeddating' " vim-orgmode的辅助插件
 
+
+call plug#end()
 " }}}}}
 
 
 
-"Plugin {{{{{
+"Plug {{{{{
 
  "UI liuchengxu/vim-which-key {{{
 let g:mapleader = "\<Space>"
@@ -353,6 +368,20 @@ let g:syntastic_enable_highlighting = 0
 let g:syntastic_enable_balloons = 1	 "whether to show balloons
 
 " }}}
+
+
+" CODING  prabirshrestha/asyncomplete.vim {{{
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
+let g:asyncomplete_smart_completion = 1
+let g:asyncomplete_auto_popup = 1
+set completeopt+=preview
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+
+" }}}
+
+
 
 "JavaScript pangloss/vim-javascript {{{
 let g:javascript_plugin_jsdoc = 1
