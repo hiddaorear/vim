@@ -142,7 +142,7 @@ set wildmode=list:longest,full    "bash shell complete
 " }}}}}
 
 " Leader {{{
-" let mapleader = "\<Space>"
+let g:mapleader = "\<Space>"
 nnoremap <Leader>w :w<CR>1
 " }}}
 
@@ -195,7 +195,6 @@ call plug#end()
 "Plug {{{{{
 
  "UI liuchengxu/vim-which-key {{{
-let g:mapleader = "\<Space>"
 let g:maplocalleader = ","
 
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
