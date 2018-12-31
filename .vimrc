@@ -176,6 +176,7 @@ Plug 'junegunn/goyo.vim'
 " CODING
 Plug 'vim-syntastic/syntastic'
 Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'tpope/vim-fugitive'
 
 " JavaScript
 Plug 'pangloss/vim-javascript'
