@@ -107,8 +107,7 @@ set ruler " 右下角显示状态说明，行号之类
 set linespace=2 " Number of pixel lines inserted between characters.
 set laststatus=2 " 总是显示状态行
 set list " 列表选项，显示行尾字符($)和未扩展标签(^I)，行尾空白
-set listchars=trail:~,tab:>-
-
+set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
 
 set wrap " 自动换行
 set wrapmargin=2 " 折行处与编辑窗口右边缘之间空出的字符数
