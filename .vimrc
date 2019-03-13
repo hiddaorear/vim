@@ -144,6 +144,7 @@ set wildmode=list:longest,full    "bash shell complete
 " Leader {{{
 let g:mapleader = "\<Space>"
 nnoremap <Leader>w :w<CR>1
+nnoremap <Leader>q :q<CR>1
 " }}}
 
 
