@@ -95,7 +95,7 @@ set guioptions-=r
 set guioptions-=b
 " 使用内置 tab 样式而不是 gui
 set guioptions-=e
-set guifont=Monaco:h16
+set guifont=YaHei_Consolas_Hybrid:h18
 set go-=r " 去除左右滚动条
 set go-=L
 set scrolloff=8 " 光标移动到buffer顶部或底部时，保持8行的距离
