@@ -374,7 +374,7 @@ let g:syntastic_warning_symbol = '⚠'
 let g:syntastic_check_on_open=1
 let g:syntastic_enable_highlighting = 0
 let g:syntastic_enable_balloons = 1	 "whether to show balloons
-
+ let g:syntastic_javsacript_checkers = ['eslint']
 " }}}
 
 
