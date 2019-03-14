@@ -70,12 +70,6 @@ quickfix window:
 8. gv: to open in vertical split silently
 9. q: to close the quickfix window
 
-## 修改的历史中搜索
-
-### undotree
-
-自定义按键绑定: leader键为空格，undotree绑定在u(undo)上
-
 
 # 光标定位
 
@@ -121,12 +115,26 @@ quickfix window:
 
 # 快速编辑
 
+## 修改的历史中搜索
+
+### undotree
+
+自定义按键绑定: leader键为空格，undotree绑定在u(undo)上
+
 ## ervandew/supertab(tab键补全)
 
 ## Instert模式
 1. ctrl-d，ctrl-t 左右缩进
 2. ctrl-w 删除
 3. ctrl-u 重新编辑
+
+## 补全
+
+- `Ctrl-x Ctrl-l`，整行补齐，常用于import等，补齐之后修改即可
+- `Ctrl-x Ctrl-f`，文件名补齐，用于import等。默认为全局目录，可以使用`./`开始，使之定位到当前目录
+- `Ctrl-x Ctrl-p` `Ctrl-x Ctrl-n`，当前文件中的关键字
+- `Ctrl-x Ctrl-o` 基于语义的补全
+
 
 ## 文件操作
 
