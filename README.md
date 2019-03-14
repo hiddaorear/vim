@@ -1,4 +1,5 @@
 # 关于vim的思考
+
 我用过vim、emacs，以及WebStorm和VS Code。我认为工具应当用其所长，用他的优点，有缺点用其他工具补充。我用vim，是因vim性能好，编辑快速。我的工作的电脑是一台MacBook Air，用IDE吃力，操作起来不流畅，卡顿起来非常难受。用vim做Web前端开发够用。Web前端很简单，我大概用没有安装额外的插件的vim工作了三年。ctrlp这些插件全没有安装，且在windows下使用，现在想来，未免觉得鲁莽可笑。以为用了高手的工具，就变成了高手，编程往层次高处去，这些都是次要的，解决的问题的思想更重要。当然，若工具影响了你的思考，那么工具也很重要。Ruby受emacs的影响，就是这样的。
 
 这里插件和配置的取舍的原则是：性能优先，尽量简洁。要简洁，所以airline这样的插件，就不会选择。要性能，所以YouCompleteMe也被排除。同时格式化和lint之类的插件，个人体验了一下，不如IDE，这部分功能使用IDE的功能即可。同样，重构代码，以目前的配置，也不如WebStorm，涉及这部分功能就用WebStorm替代。
@@ -103,8 +104,6 @@ quickfix window:
 |`[`  |上一次修改开始处 |
 |`]`  |上一次修改结束处  |
 
-
-
 ## 根据搜索定位
 
 ### easymotion/vim-easymotion
@@ -186,15 +185,28 @@ L/H/K/J`向右左上下移动分屏。如果我们想在水平分屏和垂直分
 let g:minimap_show='<leader>ms'
 let g:minimap_update='<leader>mu'
 let g:minimap_close='<leader>gc'
-let g:minimap_toggle='<leader>gt'et g:minimap_show='<leader>ms'
-let g:minimap_update='<leader>mu'
-let g:minimap_close='<leader>gc'
 let g:minimap_toggle='<leader>gt'
 ```
 
 # Leader键绑定
 1. leader键为空格
 2. w:保存文件
+
+# 文本处理
+
+## spell
+|command|用途|
+|:---|---:|
+| `:set spell`  |启用拼写检查 |
+| `:set nospell`  |关闭|
+| `]s`  | 移动到下一个拼写错误  |
+| `[s` | 移动到上一个 |
+| `z=` | 选择正确拼写 |
+| `zg`  | 添加用户拼写  |
+| `zw`  | 删除用户拼写 |
+
+
+
 
 # 其他
 1. vim和shell切换：Ctrl-z vim后台运行，跳转到shell，在shell输入fg，切回vim
