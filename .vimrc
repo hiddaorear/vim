@@ -12,7 +12,7 @@ set nocompatible " 不与 Vi 兼容
 "au BufWinEnter * silent! loadview
 "au BufWinLeave * silent! mkview
 "autocmd! bufwritepost .vimrc source %
-set autochdir " 自动切换工作目录
+"set autochdir " 自动切换工作目录，会影响ctrlp的使用
 set showmode " 底部显示插入模式还是命令模式
 set showcmd " 显示当前键入的指令
 set whichwrap=b,s,<,>,[,]
@@ -61,6 +61,8 @@ hi! link ShowMarksHLl DiffAdd
 hi! link ShowMarksHLu DiffChange
 
 " for error highlight，防止错误整行标红导致看不清
+set spell
+set spelllang=en,cjk
 highlight clear SpellBad
 highlight SpellBad term=standout ctermfg=1 term=underline cterm=underline
 highlight clear SpellCap
@@ -354,11 +356,15 @@ let g:NERDTreeChDirMode = 2
 " }}}
 
 ""FILE netrw {{{
-let g:netrw_banner = 0
-let g:netrw_liststyle = 3
-let g:netrw_browse_split = 4
-let g:netrw_altv = 1
-let g:netrw_winsize = 25
+let g:netrw_hide = 1
+let g:netrw_liststyle = 1 " 默认的一个文件一行显示的加强版，会有时间戳等信息，2模式为一行会有多个文件，3为tree模式显示
+let g:netrw_banner = 0 " 默认横幅显示，设置为不显示
+let g:netrw_browse_split = 4 " 控制窗口显示文件：0为当前，1为水平分裂，2为垂直分裂，3为在新tab中打开，4新窗口覆盖原来的窗口
+let g:netrw_winsize = 24 " 显示栏宽度
+let g:netrw_altv = 1 " 右侧分裂窗口显示
+let g:netrw_chgwin = 2
+let g:netrw_list_hide = '.*\.swp$' " 隐藏swp后缀的备份文件
+let g:netrw_localrmdir = 'rm -rf'
 " }}}
 
 
