@@ -97,7 +97,7 @@ set guioptions-=r
 set guioptions-=b
 " 使用内置 tab 样式而不是 gui
 set guioptions-=e
-set guifont=YaHei_Consolas_Hybrid:h18
+set guifont=YaHei_Consolas_Hybrid:h20
 set go-=r " 去除左右滚动条
 set go-=L
 set scrolloff=8 " 光标移动到buffer顶部或底部时，保持8行的距离
@@ -359,7 +359,7 @@ let g:NERDTreeChDirMode = 2
 let g:netrw_hide = 1
 let g:netrw_liststyle = 1 " 默认的一个文件一行显示的加强版，会有时间戳等信息，2模式为一行会有多个文件，3为tree模式显示
 let g:netrw_banner = 0 " 默认横幅显示，设置为不显示
-let g:netrw_browse_split = 4 " 控制窗口显示文件：0为当前，1为水平分裂，2为垂直分裂，3为在新tab中打开，4新窗口覆盖原来的窗口
+let g:netrw_browse_split = 1 " 控制窗口显示文件：0为当前，1为水平分裂，2为垂直分裂，3为在新tab中打开，4新窗口覆盖原来的窗口
 let g:netrw_winsize = 24 " 显示栏宽度
 let g:netrw_altv = 1 " 右侧分裂窗口显示
 let g:netrw_chgwin = 2
