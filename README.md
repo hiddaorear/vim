@@ -258,8 +258,10 @@ let g:minimap_toggle='<leader>gt'
 | `zg`  | 添加用户拼写  |
 | `zw`  | 删除用户拼写 |
 
+# terminal
 
-
+`:terminal` `term`命令打开新的终端窗口。`vert term`横向切分出终端窗口，`tab term`新标签页打开终端窗口。
+终端也有normal模式和insert模式。按`Ctrl-\ Ctrl-n`切换到normal模式，此时才能想vim的buffer一样移动光标，切换窗口。按`i`进入插入模式。
 
 # 其他
 1. vim和shell切换：Ctrl-z vim后台运行，跳转到shell，在shell输入fg，切回vim
