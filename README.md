@@ -260,7 +260,9 @@ let g:minimap_toggle='<leader>gt'
 
 # terminal
 
-`:terminal` `term`命令打开新的终端窗口。`vert term`横向切分出终端窗口，`tab term`新标签页打开终端窗口。
+`:terminal` `term`命令打开新的终端窗口。
+`:exit`退出终端，只关闭窗口时我们无法使用`:qa`退出vim。
+`vert term`横向切分出终端窗口，`tab term`新标签页打开终端窗口。
 终端也有normal模式和insert模式。按`Ctrl-\ Ctrl-n`切换到normal模式，此时才能想vim的buffer一样移动光标，切换窗口。按`i`进入插入模式。
 
 # 其他
