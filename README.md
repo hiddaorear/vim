@@ -197,8 +197,9 @@ quickfix window:
 
 #### 关闭分屏
 
-- 关闭当前窗口`Ctrl-w c`
-- 关闭当前窗口，如果只剩最后一个，则退出`Ctrl-w q`
+- `Ctrl-w c`关闭当前窗口
+- `Ctrl-w o`关闭其他分屏，只保留当前分屏
+- `Ctrl-w q`关闭当前窗口，如果只剩最后一个，则退出
 
 #### 移动分屏
 
@@ -260,10 +261,10 @@ let g:minimap_toggle='<leader>gt'
 
 # terminal
 
-`:terminal` `term`命令打开新的终端窗口。
-`:exit`退出终端，只关闭窗口时我们无法使用`:qa`退出vim。
-`vert term`横向切分出终端窗口，`tab term`新标签页打开终端窗口。
-终端也有normal模式和insert模式。按`Ctrl-\ Ctrl-n`切换到normal模式，此时才能想vim的buffer一样移动光标，切换窗口。按`i`进入插入模式。
+- `:terminal` `term`命令打开新的终端窗口。
+- `:exit`退出终端，只关闭窗口时我们无法使用`:qa`退出vim。
+- `vert term`横向切分出终端窗口，`tab term`新标签页打开终端窗口。
+- 终端也有normal模式和insert模式。按`Ctrl-\ Ctrl-n`切换到normal模式，此时才能想vim的buffer一样移动光标，切换窗口。按`i`进入插入模式。
 
 # 其他
 1. vim和shell切换：Ctrl-z vim后台运行，跳转到shell，在shell输入fg，切回vim

@@ -175,12 +175,15 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'mbbill/undotree'
 Plug 'junegunn/goyo.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'junegunn/gv.vim'
 
 " CODING
 Plug 'vim-syntastic/syntastic'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'majutsushi/tagbar'
+
 
 " JavaScript
 Plug 'pangloss/vim-javascript'
