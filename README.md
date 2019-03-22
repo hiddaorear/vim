@@ -266,14 +266,49 @@ let g:minimap_toggle='<leader>gt'
 - `vert term`横向切分出终端窗口，`tab term`新标签页打开终端窗口。
 - 终端也有normal模式和insert模式。按`Ctrl-\ Ctrl-n`切换到normal模式，此时才能想vim的buffer一样移动光标，切换窗口。按`i`进入插入模式。
 
+# git
+
+## tpope/vim-fugitive
+
+- `Gedit` View any blob, tree, commit, or tag in the repository with :Gedit (and :Gsplit, :Gvsplit, :Gtabedit, ...). Edit a file in the index and write to it to stage the changes.
+- `:Gdiff` to bring up the staged version of the file side by side with the working tree version and use Vim's diff handling capabilities to stage a subset of the file's changes.
+- `:Gstatus` Bring up an enhanced version of git status with :Gstatus. Press - to add/reset a file's changes, or = to expand an inline diff and operate on individual hunks.
+- `:Gcommit %` to commit the current file, editing the commit message inside the currently running Vim.
+- `:Gblame` brings up an interactive vertical split with git blame output. Press enter on a line to edit the commit where the line changed, or o to open it in a split. When you're done, use :Gedit in the historic buffer to go back to the work tree version.
+- `:Glog` (不好用，用gv.vim替代) loads all previous revisions of a file into the quickfix list so you can iterate over them and watch the file evolve!
+
+## junegunn/gv.vim
+
+### Commands
+
+- `:GV` to open commit browser
+    - You can pass `git log` options to the command, e.g. `:GV -S foobar`.
+- `:GV!` will only list commits that affected the current file
+- `:GV?` fills the location list with the revisions of the current file
+
+`:GV` or `:GV?` can be used in visual mode to track the changes in the
+selected lines.
+
+### Mappings
+
+- `o` or `<cr>` on a commit to display the content of it
+- `o` or `<cr>` on commits to display the diff in the range
+- `O` opens a new tab instead
+- `gb` for `:Gbrowse`
+- `]]` and `[[` to move between commits
+- `.` to start command-line with `:Git [CURSOR] SHA` à la fugitive
+- `q` to close
+
+
 # 其他
 1. vim和shell切换：Ctrl-z vim后台运行，跳转到shell，在shell输入fg，切回vim
 2. junegunn/goyo.vim 沉浸模式
 
-# 插件依赖
+# 外部插件依赖
 1. ag
 
 ## 修改
 
 - 2019/3/19之前，初步整理
 - 2019/3/19，更新补全的操作，tab操作，buffer的操作。删除冗余的vim前言，去掉啰嗦带鼓吹性质的语言
+- 2019/3/22，新增git相关插件，git操作是高频操作，避免频繁切到终端
