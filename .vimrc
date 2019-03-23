@@ -33,6 +33,56 @@ set history=1000 " vim记住历史操作次数
 " }}}
 
 
+" {{{{{
+" Specify a directory for plugins
+" - For Neovim: ~/.local/share/nvim/plugged
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
+
+" UI
+Plug 'flazz/vim-colorschemes'
+Plug 'luochen1990/rainbow'
+Plug 'severin-lemaignan/vim-minimap'
+Plug 'kshenoy/vim-signature'
+Plug 'liuchengxu/vim-which-key'
+
+" FILE
+Plug 'scrooloose/nerdtree'
+
+" SEARCH
+Plug 'rking/ag.vim'
+Plug 'ctrlpvim/ctrlp.vim'
+
+" EDITOR
+Plug 'easymotion/vim-easymotion'
+Plug 'mbbill/undotree'
+Plug 'junegunn/goyo.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'junegunn/gv.vim'
+
+" CODING
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'majutsushi/tagbar'
+Plug 'w0rp/ale'
+
+
+" JavaScript
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'maksimr/vim-jsbeautify'
+
+" mode
+Plug 'jceb/vim-orgmode' " org-mode
+Plug 'tpope/vim-speeddating' " vim-orgmode的辅助插件
+
+
+call plug#end()
+" }}}}}
+
+
+
+
 " File {{{
 set nowritebackup  " only in case you don't want a backup file while editing
 set noundofile     " no undo files
@@ -115,106 +165,6 @@ set wrapmargin=2 " 折行处与编辑窗口右边缘之间空出的字符数
 set cmdheight=1 " 命令行高度
 
 
-" {{ statusline begin
-
-set laststatus=2
-let fgcolor=synIDattr(synIDtrans(hlID("Normal")), "fg", "gui")
-let bgcolor=synIDattr(synIDtrans(hlID("Normal")), "bg", "gui")
-
-
-" Statusline
-" https://github.com/Greduan/dotfiles/blob/76e16dd8a04501db29989824af512c453550591d/vim/after/plugin/statusline.vim
-
-let g:currentmode={
-      \ 'n'  : 'N ',
-      \ 'no' : 'N·Operator Pending ',
-      \ 'v'  : 'V ',
-      \ 'V'  : 'V·Line ',
-      \ '' : 'V·Block ',
-      \ 's'  : 'Select ',
-      \ 'S'  : 'S·Line ',
-      \ '' : 'S·Block ',
-      \ 'i'  : 'I ',
-      \ 'R'  : 'R ',
-      \ 'Rv' : 'V·Replace ',
-      \ 'c'  : 'Command ',
-      \ 'cv' : 'Vim Ex ',
-      \ 'ce' : 'Ex ',
-      \ 'r'  : 'Prompt ',
-      \ 'rm' : 'More ',
-      \ 'r?' : 'Confirm ',
-      \ '!'  : 'Shell ',
-      \ 't'  : 'Terminal '
-      \}
-
-" 256色对照表: http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
-hi User1 cterm=None ctermfg=250 ctermbg=22 guifg=#000000  guibg=#F4905C
-hi User2 cterm=None ctermfg=250 ctermbg=22 guifg=#000000  guibg=#F4905C
-hi User3 cterm=None ctermfg=250 ctermbg=28 guifg=#292b00  guibg=#f4f597
-hi User4 cterm=bold ctermfg=250 ctermbg=28 guifg=#112605  guibg=#aefe7B gui=bold
-hi User5 cterm=None ctermfg=208 ctermbg=196 guifg=#051d00  guibg=#7dcc7d
-hi User6 cterm=None ctermfg=208 ctermbg=196 guifg=#051d00  guibg=#7dcc7d
-hi User7 cterm=None ctermfg=15 ctermbg=249 guifg=#ffffff guibg=#7dcc7d
-hi User8 cterm=None ctermfg=250 ctermbg=28 guifg=#ffffff  guibg=#5b7fbb
-hi User9 cterm=None ctermfg=249 ctermbg=28 guifg=#ffffff  guibg=#5b7fbb
-hi User10 cterm=None ctermfg=250 ctermbg=28 guifg=#ffffff  guibg=#5b7fbb
-
-function! BufTotalNum()
-    return len(filter(range(1, bufnr('$')), 'buflisted(v:val)'))
-endfunction
-
-" Find out current buffer's size and output it.
-function! FileSize()
-  let bytes = getfsize(expand('%:p'))
-  if (bytes >= 1024)
-    let kbytes = bytes / 1024
-  endif
-  if (exists('kbytes') && kbytes >= 1000)
-    let mbytes = kbytes / 1000
-  endif
-
-  if bytes <= 0
-    return '0'
-  endif
-
-  if (exists('mbytes'))
-    return mbytes . 'MB '
-  elseif (exists('kbytes'))
-    return kbytes . 'KB '
-  else
-    return bytes . 'B '
-  endif
-endfunction
-
-
-function! ReadOnly()
-  if &readonly || !&modifiable
-    return ''
-  else
-    return ''
-endfunction
-
-function! GitInfo()
-  let git = fugitive#head()
-  if git != ''
-    return 'Git:'.fugitive#head()
-  else
-    return ''
-endfunction
-
-set statusline=%<%1*[Buf-%n]%* " User1
-set statusline+=%2*[%{BufTotalNum()}]%* " User2
-set statusline+=%3*\ %{FileSize()}\ %* " User3
-set statusline+=%4*\ %<%F\ %{ReadOnly()}\ %m\ %w\  " User4 File+path
-set statusline+=%5*『\ %{exists('g:loaded_ale')?ALEGetStatusLine():''}』%* " User5
-set statusline+=%6*\ %{GitInfo()} " Git Branch name
-set statusline+=%7*\ %m%r%y\ %* " User7
-set statusline+=%=%8*\ %{&ff}\ \|\ %{\"\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"\ \|\"}\ %-14.(%l:%c%V%)%* " User8
-set statusline+=%9*[\ %{toupper(g:currentmode[mode()])}]   " User9 Current mode
-set statusline+=%9*\ %P\ %* " User10
-
-
-" }} statusline end
 
 " }}}
 
@@ -252,53 +202,6 @@ nnoremap <Leader>q :q<CR>1
 " }}}
 
 
-
-" {{{{{
-" Specify a directory for plugins
-" - For Neovim: ~/.local/share/nvim/plugged
-" - Avoid using standard Vim directory names like 'plugin'
-call plug#begin('~/.vim/plugged')
-
-" UI
-Plug 'flazz/vim-colorschemes'
-Plug 'luochen1990/rainbow'
-Plug 'severin-lemaignan/vim-minimap'
-Plug 'kshenoy/vim-signature'
-Plug 'liuchengxu/vim-which-key'
-
-" FILE
-Plug 'scrooloose/nerdtree'
-
-" SEARCH
-Plug 'rking/ag.vim'
-Plug 'ctrlpvim/ctrlp.vim'
-
-" EDITOR
-Plug 'easymotion/vim-easymotion'
-Plug 'mbbill/undotree'
-Plug 'junegunn/goyo.vim'
-Plug 'tpope/vim-fugitive'
-Plug 'junegunn/gv.vim'
-
-" CODING
-Plug 'vim-syntastic/syntastic'
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'tpope/vim-fugitive'
-Plug 'majutsushi/tagbar'
-
-
-" JavaScript
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
-Plug 'maksimr/vim-jsbeautify'
-
-" mode
-Plug 'jceb/vim-orgmode' " org-mode
-Plug 'tpope/vim-speeddating' " vim-orgmode的辅助插件
-
-
-call plug#end()
-" }}}}}
 
 
 
@@ -473,16 +376,6 @@ let g:netrw_localrmdir = 'rm -rf'
 " }}}
 
 
-" CODING scrooloose/syntastic {{{
-let g:syntastic_error_symbol = '✗'	"set error or warning signs
-let g:syntastic_warning_symbol = '⚠'
-let g:syntastic_check_on_open=1
-let g:syntastic_enable_highlighting = 0
-let g:syntastic_enable_balloons = 1	 "whether to show balloons
- let g:syntastic_javsacript_checkers = ['eslint']
-" }}}
-
-
 " CODING  prabirshrestha/asyncomplete.vim {{{
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
@@ -496,6 +389,42 @@ autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " CODING  majutsushi/tagbar {{{
     nmap <F8> :TagbarToggle<CR>
+" }}}
+
+
+" CODING  w0rp/ale {{{
+" Write this in your vimrc file
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 1
+"文件内容发生变化时不进行检查
+let g:ale_lint_on_text_changed = 'never'
+"打开文件时不进行检查
+let g:ale_lint_on_enter = 0
+let g:ale_sign_column_always = 1
+let g:ale_set_highlights = 0
+let g:ale_sign_error = '✗'
+let g:ale_sign_warning = '⚡'
+"普通模式下，sp前往上一个错误或警告，sn前往下一个错误或警告
+nmap sp <Plug>(ale_previous_wrap)
+nmap sn <Plug>(ale_next_wrap)
+"<Leader>s触发/关闭语法检查
+nmap <Leader>a :ALEToggle<CR>
+"<Leader>d查看错误或警告的详细信息
+nmap <Leader>d :ALEDetail<CR>
+
+function! LinterStatus() abort
+    let l:counts = ale#statusline#Count(bufnr(''))
+
+    let l:all_errors = l:counts.error + l:counts.style_error
+    let l:all_non_errors = l:counts.total - l:all_errors
+
+    return l:counts.total == 0 ? '✔ ' : printf(
+    \   '%d✗ %d⚡',
+    \   all_non_errors,
+    \   all_errors
+    \)
+endfunction
+
 " }}}
 
 
@@ -568,6 +497,109 @@ let g:EasyMotion_smartcase = 1
 " }}}
 
 " }}}}}
+
+
+
+" {{{{ statusline begin
+
+set laststatus=2
+let fgcolor=synIDattr(synIDtrans(hlID("Normal")), "fg", "gui")
+let bgcolor=synIDattr(synIDtrans(hlID("Normal")), "bg", "gui")
+
+
+" Statusline
+" https://github.com/Greduan/dotfiles/blob/76e16dd8a04501db29989824af512c453550591d/vim/after/plugin/statusline.vim
+
+let g:currentmode={
+      \ 'n'  : 'N ',
+      \ 'no' : 'N·Operator Pending ',
+      \ 'v'  : 'V ',
+      \ 'V'  : 'V·Line ',
+      \ '' : 'V·Block ',
+      \ 's'  : 'Select ',
+      \ 'S'  : 'S·Line ',
+      \ '' : 'S·Block ',
+      \ 'i'  : 'I ',
+      \ 'R'  : 'R ',
+      \ 'Rv' : 'V·Replace ',
+      \ 'c'  : 'Command ',
+      \ 'cv' : 'Vim Ex ',
+      \ 'ce' : 'Ex ',
+      \ 'r'  : 'Prompt ',
+      \ 'rm' : 'More ',
+      \ 'r?' : 'Confirm ',
+      \ '!'  : 'Shell ',
+      \ 't'  : 'Terminal '
+      \}
+
+" 256色对照表: http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
+hi User1 cterm=None ctermfg=250 ctermbg=22 guifg=#000000  guibg=#F4905C
+hi User2 cterm=None ctermfg=250 ctermbg=22 guifg=#000000  guibg=#F4905C
+hi User3 cterm=None ctermfg=250 ctermbg=28 guifg=#292b00  guibg=#f4f597
+hi User4 cterm=bold ctermfg=250 ctermbg=28 guifg=#112605  guibg=#aefe7B gui=bold
+hi User5 cterm=None ctermfg=208 ctermbg=196 guifg=#051d00  guibg=#7dcc7d
+hi User6 cterm=None ctermfg=208 ctermbg=196 guifg=#051d00  guibg=#7dcc7d
+hi User7 cterm=None ctermfg=15 ctermbg=249 guifg=#ffffff guibg=#7dcc7d
+hi User8 cterm=None ctermfg=250 ctermbg=28 guifg=#ffffff  guibg=#5b7fbb
+hi User9 cterm=None ctermfg=249 ctermbg=28 guifg=#ffffff  guibg=#5b7fbb
+hi User10 cterm=None ctermfg=250 ctermbg=28 guifg=#ffffff  guibg=#5b7fbb
+
+function! BufTotalNum()
+    return len(filter(range(1, bufnr('$')), 'buflisted(v:val)'))
+endfunction
+
+" Find out current buffer's size and output it.
+function! FileSize()
+  let bytes = getfsize(expand('%:p'))
+  if (bytes >= 1024)
+    let kbytes = bytes / 1024
+  endif
+  if (exists('kbytes') && kbytes >= 1000)
+    let mbytes = kbytes / 1000
+  endif
+
+  if bytes <= 0
+    return '0'
+  endif
+
+  if (exists('mbytes'))
+    return mbytes . 'MB '
+  elseif (exists('kbytes'))
+    return kbytes . 'KB '
+  else
+    return bytes . 'B '
+  endif
+endfunction
+
+
+function! ReadOnly()
+  if &readonly || !&modifiable
+    return ''
+  else
+    return ''
+endfunction
+
+function! GitInfo()
+  let git = fugitive#head()
+  if git != ''
+    return 'Git:'.fugitive#head()
+  else
+    return ''
+endfunction
+
+set statusline=%<%1*[Buf-%n]%* " User1
+set statusline+=%2*[%{BufTotalNum()}]%* " User2
+set statusline+=%3*\ %{FileSize()}\ %* " User3
+set statusline+=%4*\ %<%F\ %{ReadOnly()}\ %m\ %w\  " User4 File+path
+set statusline+=%5*『\ %{exists('g:loaded_ale')?LinterStatus():''}』%* " User5
+set statusline+=%6*\ %{GitInfo()} " Git Branch name
+set statusline+=%7*\ %m%r%y\ %* " User7
+set statusline+=%=%8*\ %{&ff}\ \|\ %{\"\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"\ \|\"}\ %-14.(%l:%c%V%)%* " User8
+set statusline+=%9*[\ %{toupper(g:currentmode[mode()])}]   " User9 Current mode
+set statusline+=%9*\ %P\ %* " User10
+
+" }}}} statusline end
+
 
 
 " Function {{{{{
