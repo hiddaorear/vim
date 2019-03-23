@@ -107,13 +107,115 @@ set t_Co=256 "terminal color,因terminal的vim只支持16色，设定vim使用25
 set mouse=a " || a,非a值则使用系统的标准选取、复制，使用Ctrl+c:w
 set ruler " 右下角显示状态说明，行号之类
 set linespace=2 " Number of pixel lines inserted between characters.
-set laststatus=2 " 总是显示状态行
 set list " 列表选项，显示行尾字符($)和未扩展标签(^I)，行尾空白
 set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
 
 set wrap " 自动换行
 set wrapmargin=2 " 折行处与编辑窗口右边缘之间空出的字符数
 set cmdheight=1 " 命令行高度
+
+
+" {{ statusline begin
+
+set laststatus=2
+let fgcolor=synIDattr(synIDtrans(hlID("Normal")), "fg", "gui")
+let bgcolor=synIDattr(synIDtrans(hlID("Normal")), "bg", "gui")
+
+
+" Statusline
+" https://github.com/Greduan/dotfiles/blob/76e16dd8a04501db29989824af512c453550591d/vim/after/plugin/statusline.vim
+
+let g:currentmode={
+      \ 'n'  : 'N ',
+      \ 'no' : 'N·Operator Pending ',
+      \ 'v'  : 'V ',
+      \ 'V'  : 'V·Line ',
+      \ '' : 'V·Block ',
+      \ 's'  : 'Select ',
+      \ 'S'  : 'S·Line ',
+      \ '' : 'S·Block ',
+      \ 'i'  : 'I ',
+      \ 'R'  : 'R ',
+      \ 'Rv' : 'V·Replace ',
+      \ 'c'  : 'Command ',
+      \ 'cv' : 'Vim Ex ',
+      \ 'ce' : 'Ex ',
+      \ 'r'  : 'Prompt ',
+      \ 'rm' : 'More ',
+      \ 'r?' : 'Confirm ',
+      \ '!'  : 'Shell ',
+      \ 't'  : 'Terminal '
+      \}
+
+" 256色对照表: http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
+hi User1 cterm=None ctermfg=250 ctermbg=22 guifg=#000000  guibg=#F4905C
+hi User2 cterm=None ctermfg=250 ctermbg=22 guifg=#000000  guibg=#F4905C
+hi User3 cterm=None ctermfg=250 ctermbg=28 guifg=#292b00  guibg=#f4f597
+hi User4 cterm=bold ctermfg=250 ctermbg=28 guifg=#112605  guibg=#aefe7B gui=bold
+hi User5 cterm=None ctermfg=208 ctermbg=196 guifg=#051d00  guibg=#7dcc7d
+hi User6 cterm=None ctermfg=208 ctermbg=196 guifg=#051d00  guibg=#7dcc7d
+hi User7 cterm=None ctermfg=15 ctermbg=249 guifg=#ffffff guibg=#7dcc7d
+hi User8 cterm=None ctermfg=250 ctermbg=28 guifg=#ffffff  guibg=#5b7fbb
+hi User9 cterm=None ctermfg=249 ctermbg=28 guifg=#ffffff  guibg=#5b7fbb
+hi User10 cterm=None ctermfg=250 ctermbg=28 guifg=#ffffff  guibg=#5b7fbb
+
+function! BufTotalNum()
+    return len(filter(range(1, bufnr('$')), 'buflisted(v:val)'))
+endfunction
+
+" Find out current buffer's size and output it.
+function! FileSize()
+  let bytes = getfsize(expand('%:p'))
+  if (bytes >= 1024)
+    let kbytes = bytes / 1024
+  endif
+  if (exists('kbytes') && kbytes >= 1000)
+    let mbytes = kbytes / 1000
+  endif
+
+  if bytes <= 0
+    return '0'
+  endif
+
+  if (exists('mbytes'))
+    return mbytes . 'MB '
+  elseif (exists('kbytes'))
+    return kbytes . 'KB '
+  else
+    return bytes . 'B '
+  endif
+endfunction
+
+
+function! ReadOnly()
+  if &readonly || !&modifiable
+    return ''
+  else
+    return ''
+endfunction
+
+function! GitInfo()
+  let git = fugitive#head()
+  if git != ''
+    return 'Git:'.fugitive#head()
+  else
+    return ''
+endfunction
+
+set statusline=%<%1*[Buf-%n]%* " User1
+set statusline+=%2*[%{BufTotalNum()}]%* " User2
+set statusline+=%3*\ %{FileSize()}\ %* " User3
+set statusline+=%4*\ %<%F\ %{ReadOnly()}\ %m\ %w\  " User4 File+path
+set statusline+=%5*『\ %{exists('g:loaded_ale')?ALEGetStatusLine():''}』%* " User5
+set statusline+=%6*\ %{GitInfo()} " Git Branch name
+set statusline+=%7*\ %m%r%y\ %* " User7
+set statusline+=%=%8*\ %{&ff}\ \|\ %{\"\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"\ \|\"}\ %-14.(%l:%c%V%)%* " User8
+set statusline+=%9*[\ %{toupper(g:currentmode[mode()])}]   " User9 Current mode
+set statusline+=%9*\ %P\ %* " User10
+
+
+" }} statusline end
+
 " }}}
 
 
