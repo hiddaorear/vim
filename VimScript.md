@@ -66,7 +66,7 @@ endfunction
 
 ### 面向对象
 
-无原生支持，用字典模拟。dict内部可以使用self访问dict本身。对字典使用deepcopy()方法复制，显示实例化。
+无原生支持，用字典模拟。dict内部可以使用self访问dict本身。对字典使用deepcopy()方法复制，实现实例化。
 
 ```` vimscript
 let MockClass = {"foo": "Foo"};
@@ -79,3 +79,13 @@ endfunction
 let instance = deepcopy(MyClass)
 call instance.printFoo()
 ````
+
+### 资料
+
+[VimScript 五分钟入门（翻译）](https://zhuanlan.zhihu.com/p/37352209)
+
+[usr_41](http://vimcdoc.sourceforge.net/doc/usr_41.html)
+
+[VimL 语言编程指北](https://github.com/lymslive/vimllearn)
+
+[Vim 脚本代码规范](https://github.com/wsdjeg/vim-script-style-guide)
