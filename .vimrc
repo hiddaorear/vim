@@ -533,8 +533,8 @@ let g:currentmode={
       \}
 
 " 256色对照表: http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
-hi User1 cterm=None ctermfg=250 ctermbg=22 guifg=#000000  guibg=#F4905C
-hi User2 cterm=None ctermfg=250 ctermbg=22 guifg=#000000  guibg=#F4905C
+hi User1 cterm=None ctermfg=250 ctermbg=28 guifg=#292b00  guibg=#f4f597
+hi User2 cterm=None ctermfg=250 ctermbg=28 guifg=#292b00  guibg=#f4f597
 hi User3 cterm=None ctermfg=250 ctermbg=28 guifg=#292b00  guibg=#f4f597
 hi User4 cterm=bold ctermfg=250 ctermbg=28 guifg=#112605  guibg=#aefe7B gui=bold
 hi User5 cterm=None ctermfg=208 ctermbg=196 guifg=#051d00  guibg=#7dcc7d
