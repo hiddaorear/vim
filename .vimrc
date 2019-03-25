@@ -538,7 +538,7 @@ hi User2 cterm=None ctermfg=250 ctermbg=28 guifg=#292b00  guibg=#f4f597
 hi User3 cterm=None ctermfg=250 ctermbg=28 guifg=#292b00  guibg=#f4f597
 hi User4 cterm=bold ctermfg=250 ctermbg=28 guifg=#112605  guibg=#aefe7B gui=bold
 hi User5 cterm=None ctermfg=208 ctermbg=196 guifg=#051d00  guibg=#7dcc7d
-hi User6 cterm=None ctermfg=208 ctermbg=196 guifg=#051d00  guibg=#7dcc7d
+hi User6 cterm=None ctermfg=250 ctermbg=28 guifg=#051d00  guibg=#7dcc7d
 hi User7 cterm=None ctermfg=15 ctermbg=249 guifg=#ffffff guibg=#7dcc7d
 hi User8 cterm=None ctermfg=250 ctermbg=28 guifg=#ffffff  guibg=#5b7fbb
 hi User9 cterm=None ctermfg=249 ctermbg=28 guifg=#ffffff  guibg=#5b7fbb
