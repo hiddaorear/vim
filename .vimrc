@@ -147,7 +147,7 @@ set guioptions-=r
 set guioptions-=b
 " 使用内置 tab 样式而不是 gui
 set guioptions-=e
-set guifont=YaHei_Consolas_Hybrid:h20
+set guifont=YaHei_Consolas_Hybrid:h16
 set go-=r " 去除左右滚动条
 set go-=L
 set scrolloff=8 " 光标移动到buffer顶部或底部时，保持8行的距离
@@ -533,20 +533,13 @@ let g:currentmode={
       \}
 
 " 256色对照表: http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
-hi User1 cterm=None ctermfg=250 ctermbg=28 guifg=#292b00  guibg=#f4f597
-hi User2 cterm=None ctermfg=250 ctermbg=28 guifg=#292b00  guibg=#f4f597
-hi User3 cterm=None ctermfg=250 ctermbg=28 guifg=#292b00  guibg=#f4f597
-hi User4 cterm=bold ctermfg=250 ctermbg=28 guifg=#112605  guibg=#aefe7B gui=bold
-hi User5 cterm=None ctermfg=208 ctermbg=196 guifg=#051d00  guibg=#7dcc7d
-hi User6 cterm=None ctermfg=250 ctermbg=28 guifg=#051d00  guibg=#7dcc7d
-hi User7 cterm=None ctermfg=15 ctermbg=249 guifg=#ffffff guibg=#7dcc7d
-hi User8 cterm=None ctermfg=250 ctermbg=28 guifg=#ffffff  guibg=#5b7fbb
-hi User9 cterm=None ctermfg=249 ctermbg=28 guifg=#ffffff  guibg=#5b7fbb
-hi User10 cterm=None ctermfg=250 ctermbg=28 guifg=#ffffff  guibg=#5b7fbb
-
-function! BufTotalNum()
-    return len(filter(range(1, bufnr('$')), 'buflisted(v:val)'))
-endfunction
+hi User1 cterm=None ctermfg=0 ctermbg=228 guifg=#292b00  guibg=#f4f597
+hi User2 cterm=bold ctermfg=250 ctermbg=28 guifg=#112605  guibg=#aefe7B gui=bold
+hi User3 cterm=None ctermfg=208 ctermbg=34 guifg=#ff5500 guibg=#7dcc7d
+hi User4 cterm=None ctermfg=208 ctermbg=34 guifg=#051d00  guibg=#7dcc7d
+hi User5 cterm=None ctermfg=15 ctermbg=42 guifg=#ffffff  guibg=#5b7fbb
+hi User6 cterm=None ctermfg=0 ctermbg=228 guifg=#292b00  guibg=#f4f597
+hi User7 cterm=None ctermfg=15 ctermbg=42 guifg=#ffffff  guibg=#5b7fbb
 
 " Find out current buffer's size and output it.
 function! FileSize()
@@ -588,15 +581,13 @@ function! GitInfo()
 endfunction
 
 set statusline=%<%1*[Buf-%n]%* " User1
-set statusline+=%2*[%{BufTotalNum()}]%* " User2
-set statusline+=%3*\ %{FileSize()}\ %* " User3
-set statusline+=%4*\ %<%F\ %{ReadOnly()}\ %m\ %w\  " User4 File+path
-set statusline+=%5*『\ %{exists('g:loaded_ale')?LinterStatus():''}』%* " User5
-set statusline+=%6*\ %{GitInfo()} " Git Branch name
-set statusline+=%7*\ %m%r%y\ %* " User7
-set statusline+=%=%8*\ %{&ff}\ \|\ %{\"\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"\ \|\"}\ %-14.(%l:%c%V%)%* " User8
-set statusline+=%9*[\ %{toupper(g:currentmode[mode()])}]   " User9 Current mode
-set statusline+=%9*\ %P\ %* " User10
+set statusline+=%2*\ %<%F\ %{ReadOnly()}\ %m\ %w\  " User2 File+path
+set statusline+=%3*『\ %{exists('g:loaded_ale')?LinterStatus():''}』%* " User3
+set statusline+=%4*\ %{GitInfo()} " Git Branch name User4
+set statusline+=%=%5*\ %{&ff}\ \|\ %{\"\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"\ \|\"}\ %-14.(%l:%c%V%)%* " User4
+set statusline+=%6*\ %{FileSize()}\ %* " User5
+set statusline+=%7*[\ %{toupper(g:currentmode[mode()])}] " User6 Current mode
+set statusline+=%7*\ %P\ %* " User6
 
 " }}}} statusline end
 
