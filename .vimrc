@@ -537,9 +537,8 @@ hi User1 cterm=None ctermfg=0 ctermbg=228 guifg=#292b00  guibg=#f4f597
 hi User2 cterm=bold ctermfg=250 ctermbg=28 guifg=#112605  guibg=#aefe7B gui=bold
 hi User3 cterm=None ctermfg=208 ctermbg=34 guifg=#ff5500 guibg=#7dcc7d
 hi User4 cterm=None ctermfg=208 ctermbg=34 guifg=#051d00  guibg=#7dcc7d
-hi User5 cterm=None ctermfg=15 ctermbg=42 guifg=#ffffff  guibg=#5b7fbb
-hi User6 cterm=None ctermfg=0 ctermbg=228 guifg=#292b00  guibg=#f4f597
-hi User7 cterm=None ctermfg=15 ctermbg=42 guifg=#ffffff  guibg=#5b7fbb
+hi User5 cterm=None ctermfg=0 ctermbg=228 guifg=#292b00  guibg=#f4f597
+hi User6 cterm=None ctermfg=15 ctermbg=42 guifg=#ffffff  guibg=#5b7fbb
 
 " Find out current buffer's size and output it.
 function! FileSize()
@@ -582,12 +581,11 @@ endfunction
 
 set statusline=%<%1*[Buf-%n]%* " User1
 set statusline+=%2*\ %<%F\ %{ReadOnly()}\ %m\ %w\  " User2 File+path
-set statusline+=%3*『\ %{exists('g:loaded_ale')?LinterStatus():''}』%* " User3
+set statusline+=%=%3*『\ %{exists('g:loaded_ale')?LinterStatus():''}』%* " User3
 set statusline+=%4*\ %{GitInfo()} " Git Branch name User4
-set statusline+=%=%5*\ %{&ff}\ \|\ %{\"\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"\ \|\"}\ %-14.(%l:%c%V%)%* " User4
-set statusline+=%6*\ %{FileSize()}\ %* " User5
-set statusline+=%7*[\ %{toupper(g:currentmode[mode()])}] " User6 Current mode
-set statusline+=%7*\ %P\ %* " User6
+set statusline+=%5*\ %{FileSize()}\ %* " User5
+set statusline+=%6*[\ %{toupper(g:currentmode[mode()])}] " User6 Current mode
+set statusline+=%6*\ %P\ %* " User6
 
 " }}}} statusline end
 
