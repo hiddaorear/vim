@@ -29,7 +29,20 @@
 
 ## 文件搜索
 
-### ctrlp(路径以及文件名)
+### fzf
+
+快捷键，取代 CtrlP 插件
+
+Ctrl + p 查看文件列表
+Ctrl + e 查看当前 Buffer，两次 Ctrl + e 快速切换上次打开的 Buffer
+
+``` vimscript
+nmap <C-p> :Files<CR>
+nmap <C-e> :Buffers<CR>
+let g:fzf_action = { 'ctrl-e': 'edit' }
+```
+
+### ctrlp(路径以及文件名) 注：fzf替代了ctrlp
 
 按键绑定: Ctrl-p
 
@@ -306,6 +319,7 @@ selected lines.
 
 # 外部插件依赖
 1. ag
+1. fzf
 
 ## 修改
 

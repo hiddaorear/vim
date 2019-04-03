@@ -51,7 +51,9 @@ Plug 'scrooloose/nerdtree'
 
 " SEARCH
 Plug 'rking/ag.vim'
-Plug 'ctrlpvim/ctrlp.vim'
+"Plug 'ctrlpvim/ctrlp.vim'
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
 
 " EDITOR
 Plug 'easymotion/vim-easymotion'
@@ -309,50 +311,15 @@ let g:rainbow_conf = {
 
 
 "SEARCH  rking/ag.vim {{{
-"let g:ag_prg="<custom-ag-path-goes-here> --vimgrep"
-"let g:ag_working_path_mode="r"
+let g:ag_prg="<custom-ag-path-goes-here> --vimgrep"
+let g:ag_working_path_mode="r"
 " }}}
 
-"SEARCH ctrlp {{{
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_root_markers = ['pom.xml', '.p4ignore']
-let g:ctrlp_switch_buffer = 'et'
-if executable('ag')
-  " Use Ag over Grep
-  set grepprg=ag\ --nogroup\ --nocolor
-  " Use ag in CtrlP for listing files.
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-  " Ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
-endif
 
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
- let g:ctrlp_prompt_mappings = { 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'], }
-let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|ico|git|svn))$'
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ 'link': 'some_bad_symbolic_links',
-  \ }
-
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
-set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
-
-
-let g:ctrlp_match_window_bottom=1
-let g:ctrlp_max_height=150
-let g:ctrlp_match_window_reversed=0
-let g:ctrlp_mruf_max=500
-let g:ctrlp_follow_symlinks=1
-
-let g:ctrlp_max_depth = 40
-"let g:ctrlp_max_files = 0
-let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:100'
-" search by file name
-let g:ctrlp_by_filename = 1
+"SEARCH fzf {{{
+nmap <C-p> :Files<CR>
+nmap <C-e> :Buffers<CR>
+let g:fzf_action = { 'ctrl-e': 'edit' }
 " }}}
 
 "FILE nerdtree {{{
