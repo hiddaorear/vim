@@ -1,6 +1,9 @@
-" Vim 的默认寄存器和系统剪贴板共享
-set clipboard+=unnamed
+set ignorecase
+set smartcase
+set scrolloff=3         " 3 lines above/below cursor when scrolling
 set history=100000
+" Integrate with system clipboard
+set clipboard=unnamedplus,unnamed
 " select模式下复制
 if has("clipboard")
     vnoremap <C-C> "+y
@@ -23,3 +26,24 @@ nnoremap <Space>gs :action GotoSuperMethod<CR>
 nnoremap <Space>gt :action GotoTest<CR>
 " 跳转到变量的声明
 nnoremap <Space>gS :action GotoSymbol<CR>
+
+
+" leader {{{
+"
+"
+let mapleader = " "
+
+map <leader>s :action SaveAll<CR>
+
+" AceJump {{
+" Press `j` to activate AceJump
+ map <Leader>j :action AceAction<CR>
+" Press `q` to activate Target Mode
+ map <Leader>q :action AceTargetAction<CR>
+" Press `g` to activate Line Mode
+ map <Leader>g :action AceLineAction<CR>
+" }}
+
+
+
+" }}}
