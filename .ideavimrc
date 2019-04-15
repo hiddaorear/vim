@@ -29,11 +29,11 @@ nnoremap <Space>gS :action GotoSymbol<CR>
 
 
 " leader {{{
-"
-"
+
+
 let mapleader = " "
 
-map <leader>s :action SaveAll<CR>
+map <leader>w :action SaveAll<CR>
 
 " AceJump {{
 " Press `j` to activate AceJump
@@ -44,6 +44,11 @@ map <leader>s :action SaveAll<CR>
  map <Leader>g :action AceLineAction<CR>
 " }}
 
+" Split window vertically or horizontally *and* switch to the new split!
+nnoremap <silent> <leader>hs :split<CR>
+nnoremap <silent> <leader>vs :vsplit<CR>
 
+" Close the current window
+nnoremap <silent> <m-w> :close<CR>
 
 " }}}
