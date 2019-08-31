@@ -104,8 +104,8 @@ let $LANG = 'en_US.UTF-8'
 
 
 " GUI {{{
-set background=light
-colorscheme  solarized "  torte solarized molokai phd ron evening pablo desert
+"set background=light
+colorscheme dracula "  torte solarized molokai phd ron evening pablo desert dracula
 
 " 设置标记一列的背景颜色和数字一行颜色一致
 hi! link SignColumn   LineNr
@@ -129,6 +129,9 @@ source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
 set cursorcolumn " 高亮显示光标所在的行和列
 set cursorline
+autocmd InsertEnter * let CursorColumnI = col('.')
+autocmd CursorMovedI * let CursorColumnI = col('.')
+autocmd InsertLeave * if col('.') != CursorColumnI | call cursor(0, col('.')+1) | endif
 set hlsearch
 
 autocmd InsertEnter * :set norelativenumber number
@@ -149,7 +152,7 @@ set guioptions-=r
 set guioptions-=b
 " 使用内置 tab 样式而不是 gui
 set guioptions-=e
-set guifont=YaHei_Consolas_Hybrid:h16
+set guifont=YaHei\ Consolas\ Hybrid\ 20 "YaHei_Consolas_Hybrid
 set go-=r " 去除左右滚动条
 set go-=L
 set scrolloff=8 " 光标移动到buffer顶部或底部时，保持8行的距离
