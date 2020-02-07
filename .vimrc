@@ -71,8 +71,11 @@ Plug 'hiddaorear/vim-snippets'
 
 " JavaScript
 Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
 Plug 'maksimr/vim-jsbeautify'
+Plug 'yuezk/vim-js'
+Plug 'leafgarland/typescript-vim'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'peitalin/vim-jsx-typescript'
 
 " mode
 Plug 'jceb/vim-orgmode' " org-mode
@@ -474,6 +477,25 @@ autocmd FileType jsx vnoremap <buffer> <c-f> :call RangeJsxBeautify()<cr>
 autocmd FileType html vnoremap <buffer> <c-f> :call RangeHtmlBeautify()<cr>
 autocmd FileType css vnoremap <buffer> <c-f> :call RangeCSSBeautify()<cr>
 
+"}}}
+
+"JavaScript  TypeScript TS TSX {{{
+" set filetypes as typescript.tsx
+autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
+
+" Set jsx-tag colors
+" dark red
+hi tsxTagName guifg=#E06C75
+
+" orange
+hi tsxCloseString guifg=#F99575
+hi tsxCloseTag guifg=#F99575
+hi tsxCloseTagName guifg=#F99575
+hi tsxAttributeBraces guifg=#F99575
+hi tsxEqual guifg=#F99575
+
+" yellow
+hi tsxAttrib guifg=#F8BD7F cterm=italic
 "}}}
 
 "EDTOR mbbill/undotree {{{
