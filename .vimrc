@@ -1,5 +1,4 @@
 "
-"@Yifeng Wang
 "2015-06-28
 "github:hiddaorear
 "
@@ -50,10 +49,9 @@ Plug 'liuchengxu/vim-which-key'
 Plug 'scrooloose/nerdtree'
 
 " SEARCH
-Plug 'rking/ag.vim'
-"Plug 'ctrlpvim/ctrlp.vim'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
+Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 
 " EDITOR
 Plug 'easymotion/vim-easymotion'
@@ -68,6 +66,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'majutsushi/tagbar'
 Plug 'w0rp/ale'
 
+Plug 'SirVer/ultisnips'
+Plug 'hiddaorear/vim-snippets'
 
 " JavaScript
 Plug 'pangloss/vim-javascript'
@@ -104,8 +104,8 @@ let $LANG = 'en_US.UTF-8'
 
 
 " GUI {{{
-"set background=light
-colorscheme dracula "  torte solarized molokai phd ron evening pablo desert dracula
+" set background=light
+colorscheme molokai "  torte solarized molokai phd ron evening pablo desert
 
 " 设置标记一列的背景颜色和数字一行颜色一致
 hi! link SignColumn   LineNr
@@ -129,9 +129,6 @@ source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
 set cursorcolumn " 高亮显示光标所在的行和列
 set cursorline
-autocmd InsertEnter * let CursorColumnI = col('.')
-autocmd CursorMovedI * let CursorColumnI = col('.')
-autocmd InsertLeave * if col('.') != CursorColumnI | call cursor(0, col('.')+1) | endif
 set hlsearch
 
 autocmd InsertEnter * :set norelativenumber number
@@ -152,7 +149,7 @@ set guioptions-=r
 set guioptions-=b
 " 使用内置 tab 样式而不是 gui
 set guioptions-=e
-set guifont=YaHei\ Consolas\ Hybrid\ 20 "YaHei_Consolas_Hybrid
+set guifont=YaHei_Consolas_Hybrid:h16
 set go-=r " 去除左右滚动条
 set go-=L
 set scrolloff=8 " 光标移动到buffer顶部或底部时，保持8行的距离
@@ -204,9 +201,15 @@ set wildmode=list:longest,full    "bash shell complete
 let g:mapleader = "\<Space>"
 nnoremap <Leader>w :w<CR>1
 nnoremap <Leader>q :q<CR>1
+
+nnoremap <Leader>t :NERDTreeToggle<CR>1
+
+nnoremap <Leader>e :Ex<CR>1
+
+nnoremap <Leader>f :Files<CR>1
+nnoremap <Leader>b :Buffers<CR>1
+
 " }}}
-
-
 
 
 
@@ -313,11 +316,45 @@ let g:rainbow_conf = {
 " }}}
 
 
-"SEARCH  rking/ag.vim {{{
-let g:ag_prg="<custom-ag-path-goes-here> --vimgrep"
-let g:ag_working_path_mode="r"
-" }}}
+"SEARCH Yggdroot/LeaderF {{{
+" don't show the help in normal mode
+let g:Lf_HideHelp = 1
+let g:Lf_UseCache = 0
+let g:Lf_UseVersionControlTool = 0
+let g:Lf_IgnoreCurrentBufferName = 1
+" popup mode
+let g:Lf_WindowPosition = 'popup'
+let g:Lf_PreviewInPopup = 1
+let g:Lf_PreviewResult = {'Function': 0, 'BufTag': 0 }
 
+let g:Lf_ShortcutF = "<leader>ff"
+noremap <leader>fb :<C-U><C-R>=printf("Leaderf buffer %s", "")<CR><CR>
+noremap <leader>fm :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
+noremap <leader>ft :<C-U><C-R>=printf("Leaderf bufTag %s", "")<CR><CR>
+noremap <leader>fl :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
+
+noremap <C-B> :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s ", expand("<cword>"))<CR>
+noremap <C-F> :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
+" search visually selected text literally
+xnoremap gf :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR>
+noremap go :<C-U>Leaderf! rg --recall<CR>
+
+" should use `Leaderf gtags --update` first
+let g:Lf_GtagsAutoGenerate = 0
+let g:Lf_Gtagslabel = 'native-pygments'
+noremap <leader>fr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
+noremap <leader>fd :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
+noremap <leader>fo :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>
+noremap <leader>fn :<C-U><C-R>=printf("Leaderf gtags --next %s", "")<CR><CR>
+noremap <leader>fp :<C-U><C-R>=printf("Leaderf gtags --previous %s", "")<CR><CR>
+
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
+" }}}
 
 "SEARCH fzf {{{
 nmap <C-p> :Files<CR>
@@ -397,6 +434,16 @@ endfunction
 
 " }}}
 
+
+" CODING  SirVer/ultisnips {{{
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+" }}}
 
 "JavaScript pangloss/vim-javascript {{{
 let g:javascript_plugin_jsdoc = 1
@@ -576,3 +623,35 @@ endfunction
 autocmd BufWritePre * call RemoveTrailingWhitespace()
 
 " }}}}}
+" ## added by OPAM user-setup for vim / base ## 93ee63e278bdfc07d1139a748ed3fff2 ## you can edit, but keep this line
+let s:opam_share_dir = system("opam config var share")
+let s:opam_share_dir = substitute(s:opam_share_dir, '[\r\n]*$', '', '')
+
+let s:opam_configuration = {}
+
+function! OpamConfOcpIndent()
+  execute "set rtp^=" . s:opam_share_dir . "/ocp-indent/vim"
+endfunction
+let s:opam_configuration['ocp-indent'] = function('OpamConfOcpIndent')
+
+function! OpamConfOcpIndex()
+  execute "set rtp+=" . s:opam_share_dir . "/ocp-index/vim"
+endfunction
+let s:opam_configuration['ocp-index'] = function('OpamConfOcpIndex')
+
+function! OpamConfMerlin()
+  let l:dir = s:opam_share_dir . "/merlin/vim"
+  execute "set rtp+=" . l:dir
+endfunction
+let s:opam_configuration['merlin'] = function('OpamConfMerlin')
+
+let s:opam_packages = ["ocp-indent", "ocp-index", "merlin"]
+let s:opam_check_cmdline = ["opam list --installed --short --safe --color=never"] + s:opam_packages
+let s:opam_available_tools = split(system(join(s:opam_check_cmdline)))
+for tool in s:opam_packages
+  " Respect package order (merlin should be after ocp-index)
+  if count(s:opam_available_tools, tool) > 0
+    call s:opam_configuration[tool]()
+  endif
+endfor
+" ## end of OPAM user-setup addition for vim / base ## keep this line

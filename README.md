@@ -1,5 +1,7 @@
 # 关于vim的思考
 
+## **此文档不再维护，只维护vim配置。文档被移入cheat**
+
 我用过vim、emacs，以及WebStorm和VS Code。我认为工具应当用其所长。
 
 用他的优点，有缺点用其他工具补充。vim性能好，编辑快捷。有段时间，我工作的电脑是一台MacBook Air，用IDE吃力，操作起来不流畅。用vim做Web前端开发够用。Web前端很简单，我大概用没有安装额外的插件的vim工作了三年。现在想来，未免觉得鲁莽可笑。
@@ -83,23 +85,6 @@ let g:fzf_action = { 'ctrl-e': 'edit' }
 
 
 ## 字符串全局搜索
-
-### ag.vim(文件中的字符串)
-
-usage:
-1. : Ag [options]{pattern}[{directory}]
-
-quickfix window:
-1. o: to open(same as enter)
-2. go: to preview file(open but maintain focus on ag.vim results)
-3. t: to open in new tab
-4. T: to open in new tab silently
-5. h: to open in horizontal split
-6. H: to open in horizontal split silently
-7. v: to open in vertical split silently
-8. gv: to open in vertical split silently
-9. q: to close the quickfix window
-
 
 # 光标定位
 
