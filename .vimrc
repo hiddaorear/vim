@@ -49,7 +49,7 @@ Plug 'liuchengxu/vim-which-key'
 Plug 'scrooloose/nerdtree'
 
 " SEARCH
-Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf', { 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 
@@ -202,22 +202,28 @@ set wildmode=list:longest,full    "bash shell complete
 
 " Leader {{{
 let g:mapleader = "\<Space>"
-nnoremap <Leader>w :w<CR>1
-nnoremap <Leader>q :q<CR>1
+nnoremap <Leader>w :w<CR>
+nnoremap <Leader>q :q<CR>
 
-nnoremap <Leader>t :NERDTreeToggle<CR>1
+nnoremap <Leader>t :NERDTreeToggle<CR>
 
-nnoremap <Leader>e :Ex<CR>1
+nnoremap <Leader>e :Ex<CR>
 
-nnoremap <Leader>f :Files<CR>1
-nnoremap <Leader>b :Buffers<CR>1
+nnoremap <Leader>f :Files<CR>
+nnoremap <Leader>b :Buffers<CR>
+
+" Leaderf
+noremap <leader>fu :<C-U><C-R>=printf("Leaderf buffer %s", "")<CR><CR>
+noremap <leader>ft :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
 
 " fzf
-noremap <leader>fb :<C-U><C-R>=printf("Leaderf buffer %s", "")<CR><CR>
-noremap <leader>fm :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
-noremap <leader>ft :<C-U><C-R>=printf("Leaderf bufTag %s", "")<CR><CR>
-noremap <leader>fl :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
-
+noremap <leader>fb :Buffers<CR>
+noremap <leader>fr :Rg
+noremap <leader>fl :BLines<CR>
+noremap <leader>fm :Marks<CR>
+noremap <leader>fw :Windows<CR>
+noremap <leader>fh :History:<CR>
+noremap <leader>fc :Commands<CR>
 
 " }}}
 
@@ -338,33 +344,24 @@ let g:Lf_PreviewInPopup = 1
 let g:Lf_PreviewResult = {'Function': 0, 'BufTag': 0 }
 
 let g:Lf_ShortcutF = "<leader>ff"
-noremap <C-B> :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s ", expand("<cword>"))<CR>
-noremap <C-F> :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
-" search visually selected text literally
-xnoremap gf :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR>
-noremap go :<C-U>Leaderf! rg --recall<CR>
 
-" should use `Leaderf gtags --update` first
-let g:Lf_GtagsAutoGenerate = 0
-let g:Lf_Gtagslabel = 'native-pygments'
-noremap <leader>fr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
-noremap <leader>fd :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
-noremap <leader>fo :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>
-noremap <leader>fn :<C-U><C-R>=printf("Leaderf gtags --next %s", "")<CR><CR>
-noremap <leader>fp :<C-U><C-R>=printf("Leaderf gtags --previous %s", "")<CR><CR>
-
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \   <bang>0)
 " }}}
 
 "SEARCH fzf {{{
 nmap <C-p> :Files<CR>
-nmap <C-e> :Buffers<CR>
+
 let g:fzf_action = { 'ctrl-e': 'edit' }
+" [Buffers] Jump to the existing window if possible
+let g:fzf_buffers_jump = 1
+
+" [[B]Commits] Customize the options used by 'git log':
+let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
+
+" [Tags] Command to generate tags file
+let g:fzf_tags_command = 'ctags -R'
+
+" [Commands] --expect expression for directly executing the command
+let g:fzf_commands_expect = 'alt-enter,ctrl-x'
 " }}}
 
 "FILE nerdtree {{{
