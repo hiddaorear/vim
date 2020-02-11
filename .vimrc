@@ -64,7 +64,7 @@ Plug 'junegunn/gv.vim'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'majutsushi/tagbar'
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 
 Plug 'SirVer/ultisnips'
 Plug 'hiddaorear/vim-snippets'
@@ -209,17 +209,15 @@ nnoremap <Leader>t :NERDTreeToggle<CR>
 
 nnoremap <Leader>e :Ex<CR>
 
-nnoremap <Leader>f :Files<CR>
-nnoremap <Leader>b :Buffers<CR>
-
 " Leaderf
+let g:Lf_ShortcutF = "<leader>ff"
 noremap <leader>fu :<C-U><C-R>=printf("Leaderf buffer %s", "")<CR><CR>
 noremap <leader>ft :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
 
 " fzf
 noremap <leader>fb :Buffers<CR>
 noremap <leader>fr :Rg
-noremap <leader>fl :BLines<CR>
+noremap <leader>s :BLines<CR> " search text
 noremap <leader>fm :Marks<CR>
 noremap <leader>fw :Windows<CR>
 noremap <leader>fh :History:<CR>
@@ -343,7 +341,6 @@ let g:Lf_WindowPosition = 'popup'
 let g:Lf_PreviewInPopup = 1
 let g:Lf_PreviewResult = {'Function': 0, 'BufTag': 0 }
 
-let g:Lf_ShortcutF = "<leader>ff"
 
 " }}}
 
@@ -401,8 +398,7 @@ autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 " }}}
 
 
-" CODING  w0rp/ale {{{
-" Write this in your vimrc file
+" CODING dense-analysis/ale {{{
 let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 1
 "文件内容发生变化时不进行检查
