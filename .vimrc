@@ -59,6 +59,7 @@ Plug 'mbbill/undotree'
 Plug 'junegunn/goyo.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
+Plug 'chrisbra/NrrwRgn'
 
 " CODING
 Plug 'prabirshrestha/asyncomplete.vim'
@@ -216,8 +217,9 @@ noremap <leader>ft :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
 
 " fzf
 noremap <leader>fb :Buffers<CR>
-noremap <leader>fr :Rg
+noremap <leader>fp :Rgp " 自定义支持路径搜索 Rg string path 的意思
 noremap <leader>s :BLines<CR> " search text
+noremap <leader>fr :Rg
 noremap <leader>fm :Marks<CR>
 noremap <leader>fw :Windows<CR>
 noremap <leader>fh :History:<CR>
@@ -361,7 +363,7 @@ let g:fzf_tags_command = 'ctags -R'
 let g:fzf_commands_expect = 'alt-enter,ctrl-x'
 
 " Rag 支持传入路径搜索(Find matches for "foo" in path /bar/.)，如：ag foo /bar/
-command! -bang -nargs=+ -complete=dir Rag call fzf#vim#ag_raw(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0)
+command! -bang -nargs=+ -complete=dir Rgp call fzf#vim#ag_raw(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0)
 
 " Customize fzf colors to match your color scheme
 let g:fzf_colors =
@@ -547,6 +549,10 @@ let g:minimap_highlight='Visual'
 " }}}
 
 
+"EDITOR easymotion/vim-easymotion {{{
+noremap <Leader>nr: NR<CR> "Open the current visual selection in a new narrowed window
+noremap <Leader>nrw: NR<CR> "(In the narrowed window) write the changes back to the original buffer.
+" }}}
 
 "EDITOR easymotion/vim-easymotion {{{
 " 更改快捷键
