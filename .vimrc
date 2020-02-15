@@ -8,10 +8,7 @@ syn on
 syntax on " 打开语法高亮
 set nocompatible " 不与 Vi 兼容
 " General {{{
-"au BufWinEnter * silent! loadview
-"au BufWinLeave * silent! mkview
-"autocmd! bufwritepost .vimrc source %
-"set autochdir " 自动切换工作目录，会影响ctrlp的使用
+set autochdir " 自动切换工作目录，会影响ctrlp的使用
 set showmode " 底部显示插入模式还是命令模式
 set showcmd " 显示当前键入的指令
 set whichwrap=b,s,<,>,[,]
@@ -44,7 +41,8 @@ Plug 'luochen1990/rainbow'
 Plug 'severin-lemaignan/vim-minimap'
 Plug 'kshenoy/vim-signature'
 Plug 'liuchengxu/vim-which-key'
-
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 " FILE
 Plug 'scrooloose/nerdtree'
 
@@ -153,7 +151,7 @@ set guioptions-=r
 set guioptions-=b
 " 使用内置 tab 样式而不是 gui
 set guioptions-=e
-set guifont=YaHei_Consolas_Hybrid:h16
+set guifont=Source\ Code\ Pro\ for\ Powerline:h18
 set go-=r " 去除左右滚动条
 set go-=L
 set scrolloff=8 " 光标移动到buffer顶部或底部时，保持8行的距离
@@ -201,6 +199,14 @@ set wildmode=list:longest,full    "bash shell complete
 
 " }}}}}
 
+" find {{{
+
+set path+=**
+set wildmenu
+set wildignore+=*.zip,*.png,*.jpg,*.gif,*.pdf,*DS_Store*,*/.git/*,*/node_modules/*,*/build/*,package-lock.json,yarn.json
+
+" }}}
+
 " Leader {{{
 let g:mapleader = "\<Space>"
 nnoremap <Leader>w :w<CR>
@@ -217,12 +223,15 @@ noremap <leader>ft :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
 
 " fzf
 noremap <leader>fb :Buffers<CR>
-noremap <leader>fp :Rgp " 自定义支持路径搜索 Rg string path 的意思
-noremap <leader>s :BLines<CR> " search text
+" 自定义支持路径搜索 Rg string path 的意思
+noremap <leader>f :Rgp
+noremap <leader>fw :Rg -w
+" search text
+noremap <leader>s :BLines<CR>
 noremap <leader>fr :Rg
-noremap <leader>fm :Marks<CR>
+noremap <leader>m :Marks<CR>
 noremap <leader>fw :Windows<CR>
-noremap <leader>fh :History:<CR>
+noremap <leader>h :History:<CR>
 noremap <leader>fc :Commands<CR>
 
 " }}}
@@ -230,6 +239,17 @@ noremap <leader>fc :Commands<CR>
 
 
 "Plug {{{{{
+"
+ "UI vim-airline/vim-airline {{{
+let g:airline_theme="base16_spacemacs"
+let g:airline_powerline_fonts = 1
+"let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#buffer_nr_show = 1
+nnoremap <C-N> :bn<CR>
+nnoremap <C-M> :bp<CR>
+set t_Co=256
+let g:Powerline_symbols = 'fancy'
+" }}}
 
  "UI liuchengxu/vim-which-key {{{
 let g:maplocalleader = ","
