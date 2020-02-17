@@ -218,17 +218,18 @@ nnoremap <Leader>e :Ex<CR>
 
 " Leaderf
 let g:Lf_ShortcutF = "<leader>ff"
-noremap <leader>fu :<C-U><C-R>=printf("Leaderf buffer %s", "")<CR><CR>
+noremap <leader>fb :<C-U><C-R>=printf("Leaderf buffer %s", "")<CR><CR>
 noremap <leader>ft :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
 
 " fzf
-noremap <leader>fb :Buffers<CR>
+noremap <leader>b :Buffers<CR>
+noremap <leader>fg :GFiles?<CR>
 " 自定义支持路径搜索 Rg string path 的意思
-noremap <leader>f :Rgp
+noremap <leader>f :Rg
 noremap <leader>fw :Rg -w
 " search text
 noremap <leader>s :BLines<CR>
-noremap <leader>fr :Rg
+noremap <leader>fr :Rg<CR>
 noremap <leader>m :Marks<CR>
 noremap <leader>fw :Windows<CR>
 noremap <leader>h :History:<CR>
