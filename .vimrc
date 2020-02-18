@@ -225,10 +225,11 @@ noremap <leader>ft :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
 noremap <leader>b :Buffers<CR>
 noremap <leader>fg :GFiles?<CR>
 " 自定义支持路径搜索 Rg string path 的意思
-noremap <leader>f :Rg
-noremap <leader>fw :Rg -w
+noremap <leader>fp :Rgp
+noremap <leader>fr :Rg
+noremap <leader>frw :Rg -w
 " search text
-noremap <leader>s :BLines<CR>
+noremap <leader>fl :BLines<CR>
 noremap <leader>m :Marks<CR>
 noremap <leader>fw :Windows<CR>
 noremap <leader>h :History:<CR>
