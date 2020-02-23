@@ -106,8 +106,12 @@ let $LANG = 'en_US.UTF-8'
 
 
 " GUI {{{
-" set background=light
-colorscheme molokai "  torte solarized molokai phd ron evening pablo desert
+set background=dark
+let g:solarized_visibility = "high"
+let g:solarized_contrast = "high"
+" 修复mac iTerm2 颜色问题
+let g:solarized_termcolors=256
+colorscheme  solarized"  torte solarized molokai phd ron evening pablo desert
 
 " 设置标记一列的背景颜色和数字一行颜色一致
 hi! link SignColumn   LineNr
@@ -166,7 +170,7 @@ set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
 
 set wrap " 自动换行
 set wrapmargin=2 " 折行处与编辑窗口右边缘之间空出的字符数
-set cmdheight=2 " 命令行高度
+set cmdheight=1 " 命令行高度
 
 
 
