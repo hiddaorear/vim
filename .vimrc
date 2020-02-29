@@ -107,11 +107,24 @@ let $LANG = 'en_US.UTF-8'
 
 " GUI {{{
 set background=dark
-let g:solarized_visibility = "high"
-let g:solarized_contrast = "high"
-" 修复mac iTerm2 颜色问题
-let g:solarized_termcolors=256
-colorscheme  solarized"  torte solarized molokai phd ron evening pablo desert
+colorscheme onedark " torte solarized molokai phd ron evening pablo desert
+filetype indent on
+set paste
+"Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
+"If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
+"(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
+if (empty($TMUX))
+  if (has("nvim"))
+    "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  endif
+  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+  if (has("termguicolors"))
+    set termguicolors
+  endif
+endif
 
 " 设置标记一列的背景颜色和数字一行颜色一致
 hi! link SignColumn   LineNr
@@ -211,6 +224,20 @@ set wildignore+=*.zip,*.png,*.jpg,*.gif,*.pdf,*DS_Store*,*/.git/*,*/node_modules
 
 " }}}
 
+
+" mark {{{
+function! Delmarks()
+    let l:m = join(filter(
+       \ map(range(char2nr('a'), char2nr('z')), 'nr2char(v:val)'),
+       \ 'line("''".v:val) == line(".")'))
+    if !empty(l:m)
+        exe 'delmarks' l:m
+    endif
+endfunction
+
+nnoremap <F2> call Delmarks()<CR>
+" }}}
+
 " Leader {{{
 let g:mapleader = "\<Space>"
 nnoremap <Leader>w :w<CR>
@@ -226,9 +253,10 @@ noremap <leader>fb :<C-U><C-R>=printf("Leaderf buffer %s", "")<CR><CR>
 noremap <leader>ft :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
 
 " fzf
+noremap <leader>a :FZF
 noremap <leader>b :Buffers<CR>
 noremap <leader>fg :GFiles?<CR>
-" 自定义支持路径搜索 Rg string path 的意思
+" 自定义支持路径搜索 Rg string path 的意a
 noremap <leader>fp :Rgp
 noremap <leader>fr :Rg
 noremap <leader>frw :Rg -w
@@ -246,7 +274,8 @@ noremap <leader>fc :Commands<CR>
 "Plug {{{{{
 "
  "UI vim-airline/vim-airline {{{
-let g:airline_theme="base16_spacemacs"
+" let g:airline_theme="base16_spacemacs"
+let g:airline_theme='onedark'
 let g:airline_powerline_fonts = 1
 "let g:airline#extensions#tabline#enabled = 1
 "let g:airline#extensions#tabline#buffer_nr_show = 1
@@ -496,7 +525,7 @@ endfunction
 
 " CODING  SirVer/ultisnips {{{
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsExpandTrigger="<c-s>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
@@ -544,7 +573,6 @@ let g:coc_global_extensions = [
   \ 'coc-prettier',
   \ 'coc-json',
   \ ]
-
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
@@ -812,53 +840,3 @@ set statusline+=%6*[\ %{toupper(g:currentmode[mode()])}] " User6 Current mode
 set statusline+=%6*\ %P\ %* " User6
 
 " }}}} statusline end
-
-
-
-" Function {{{{{
-
-" Remove trailing whitespace when writing a buffer, but not for diff files.
-function! RemoveTrailingWhitespace()
-    if &ft != "diff"
-        let b:curcol = col(".")
-        let b:curline = line(".")
-        silent! %s/\s\+$//
-        silent! %s/\(\s*\n\)\+\%$//
-        call cursor(b:curline, b:curcol)
-    endif
-endfunction
-autocmd BufWritePre * call RemoveTrailingWhitespace()
-
-" }}}}}
-" ## added by OPAM user-setup for vim / base ## 93ee63e278bdfc07d1139a748ed3fff2 ## you can edit, but keep this line
-let s:opam_share_dir = system("opam config var share")
-let s:opam_share_dir = substitute(s:opam_share_dir, '[\r\n]*$', '', '')
-
-let s:opam_configuration = {}
-
-function! OpamConfOcpIndent()
-  execute "set rtp^=" . s:opam_share_dir . "/ocp-indent/vim"
-endfunction
-let s:opam_configuration['ocp-indent'] = function('OpamConfOcpIndent')
-
-function! OpamConfOcpIndex()
-  execute "set rtp+=" . s:opam_share_dir . "/ocp-index/vim"
-endfunction
-let s:opam_configuration['ocp-index'] = function('OpamConfOcpIndex')
-
-function! OpamConfMerlin()
-  let l:dir = s:opam_share_dir . "/merlin/vim"
-  execute "set rtp+=" . l:dir
-endfunction
-let s:opam_configuration['merlin'] = function('OpamConfMerlin')
-
-let s:opam_packages = ["ocp-indent", "ocp-index", "merlin"]
-let s:opam_check_cmdline = ["opam list --installed --short --safe --color=never"] + s:opam_packages
-let s:opam_available_tools = split(system(join(s:opam_check_cmdline)))
-for tool in s:opam_packages
-  " Respect package order (merlin should be after ocp-index)
-  if count(s:opam_available_tools, tool) > 0
-    call s:opam_configuration[tool]()
-  endif
-endfor
-" ## end of OPAM user-setup addition for vim / base ## keep this line
