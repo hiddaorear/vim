@@ -69,10 +69,10 @@ Plug 'hiddaorear/vim-snippets'
 
 
 " JavaScript
-Plug 'pangloss/vim-javascript'
-Plug 'yuezk/vim-js'
+"Plug 'pangloss/vim-javascript'
+"Plug 'yuezk/vim-js'
+"Plug 'maxmellon/vim-jsx-pretty'
 Plug 'leafgarland/typescript-vim'
-Plug 'maxmellon/vim-jsx-pretty'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
@@ -168,7 +168,8 @@ set guioptions-=r
 set guioptions-=b
 " 使用内置 tab 样式而不是 gui
 set guioptions-=e
-set guifont=Source\ Code\ Pro\ for\ Powerline:h18
+set macligatures
+set guifont=Fira\ Code:h18
 set go-=r " 去除左右滚动条
 set go-=L
 set scrolloff=8 " 光标移动到buffer顶部或底部时，保持8行的距离
@@ -247,18 +248,13 @@ nnoremap <Leader>t :NERDTreeToggle<CR>
 
 nnoremap <Leader>e :Ex<CR>
 
-" Leaderf
-let g:Lf_ShortcutF = "<leader>ff"
-noremap <leader>fb :<C-U><C-R>=printf("Leaderf buffer %s", "")<CR><CR>
-noremap <leader>ft :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
-
 " fzf
-noremap <leader>a :FZF
+noremap <leader>ll :Files 
 noremap <leader>b :Buffers<CR>
 noremap <leader>fg :GFiles?<CR>
 " 自定义支持路径搜索 Rg string path 的意a
 noremap <leader>fp :Rgp
-noremap <leader>fr :Rg
+noremap <leader>rg :Rg
 noremap <leader>frw :Rg -w
 " search text
 noremap <leader>fl :BLines<CR>
@@ -387,6 +383,7 @@ let g:rainbow_conf = {
 
 
 "SEARCH Yggdroot/LeaderF {{{
+
 " don't show the help in normal mode
 let g:Lf_HideHelp = 1
 let g:Lf_UseCache = 0
@@ -395,9 +392,29 @@ let g:Lf_IgnoreCurrentBufferName = 1
 " popup mode
 let g:Lf_WindowPosition = 'popup'
 let g:Lf_PreviewInPopup = 1
+let g:Lf_StlSeparator = { 'left': "\ue0b0", 'right': "\ue0b2", 'font': "DejaVu Sans Mono for Powerline" }
 let g:Lf_PreviewResult = {'Function': 0, 'BufTag': 0 }
 
+let g:Lf_ShortcutF = "<leader>ff"
+noremap <leader>fb :<C-U><C-R>=printf("Leaderf buffer %s", "")<CR><CR>
+noremap <leader>fm :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
+noremap <leader>ft :<C-U><C-R>=printf("Leaderf bufTag %s", "")<CR><CR>
+noremap <leader>fl :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
 
+noremap <C-B> :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s ", expand("<cword>"))<CR>
+noremap <C-F> :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
+" search visually selected text literally
+xnoremap gf :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR>
+noremap go :<C-U>Leaderf! rg --recall<CR>
+
+" should use `Leaderf gtags --update` first
+let g:Lf_GtagsAutoGenerate = 0
+let g:Lf_Gtagslabel = 'native-pygments'
+noremap <leader>fr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
+noremap <leader>fd :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
+noremap <leader>fo :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>
+noremap <leader>fn :<C-U><C-R>=printf("Leaderf gtags --next %s", "")<CR><CR>
+noremap <leader>fp :<C-U><C-R>=printf("Leaderf gtags --previous %s", "")<CR><CR>
 " }}}
 
 "SEARCH fzf {{{
@@ -406,6 +423,8 @@ nmap <C-p> :Files<CR>
 let g:fzf_action = { 'ctrl-e': 'edit' }
 " [Buffers] Jump to the existing window if possible
 let g:fzf_buffers_jump = 1
+
+command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
 
 " [[B]Commits] Customize the options used by 'git log':
 let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
@@ -535,36 +554,22 @@ let g:UltiSnipsEditSplit="vertical"
 
 
 "JavaScript pangloss/vim-javascript {{{
-let g:javascript_plugin_jsdoc = 1
-let g:javascript_plugin_ngdoc = 1
-let g:javascript_plugin_flow = 1
-set foldmethod=syntax
+"let g:javascript_plugin_jsdoc = 1
+"let g:javascript_plugin_ngdoc = 1
+"let g:javascript_plugin_flow = 1
+"set foldmethod=syntax
 "let g:javascript_conceal_function             = "ƒ"
 "let g:javascript_conceal_null                 = "ø"
 " }}}
 
 
-"JavaScript  TypeScript TS TSX {{{
-" set filetypes as typescript.tsx
+"JavaScript leafgarland/typescript-vim {{{
+"set filetypes as typescript.tsx
 autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
-
-" Set jsx-tag colors
-" dark red
-hi tsxTagName guifg=#E06C75
-
-" orange
-hi tsxCloseString guifg=#F99575
-hi tsxCloseTag guifg=#F99575
-hi tsxCloseTagName guifg=#F99575
-hi tsxAttributeBraces guifg=#F99575
-hi tsxEqual guifg=#F99575
-
-" yellow
-hi tsxAttrib guifg=#F8BD7F cterm=italic
 "}}}
 
 
-"JavaScript peitalin/vim-jsx-typescript  {{{
+"JavaScript neoclide/coc.nvim  {{{
 let g:coc_global_extensions = [
   \ 'coc-snippets',
   \ 'coc-pairs',
