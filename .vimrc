@@ -43,6 +43,8 @@ Plug 'kshenoy/vim-signature'
 Plug 'liuchengxu/vim-which-key'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'mhinz/vim-startify'
+
 " FILE
 Plug 'scrooloose/nerdtree'
 
@@ -58,6 +60,9 @@ Plug 'junegunn/goyo.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
 Plug 'chrisbra/NrrwRgn'
+Plug 'godlygeek/tabular' 
+Plug 'plasticboy/vim-markdown'
+Plug 'mzlogin/vim-markdown-toc'
 
 " CODING
 Plug 'prabirshrestha/asyncomplete.vim'
@@ -280,6 +285,49 @@ nnoremap <C-M> :bp<CR>
 set t_Co=256
 let g:Powerline_symbols = 'fancy'
 " }}}
+
+" UI mhinz/vim-startify {{{
+let g:startify_files_number = 10
+"Open Statify
+nnoremap <silent> <F3> :Startify <CR> 
+
+" Welcome Page{{{
+
+let g:startify_custom_header = [
+\ '                             ███████████               ',
+\ '                          ███████████████████               ',
+\ '                         ███████████████████                ',
+\ '                         ██████████████████████░            ',
+\ '           ██░           █████████████████████████░░        ',
+\ '            ░██░        ███████████████████████████░       ',
+\ '               ░██░    █████████████████████████████████░   ',
+\ '                 ████████████████████████████████████████░  ',
+\ '                    ███████████████████████████████████░    ',
+\ '   █████     ███  ░█████████████████████████░░░             ',
+\ '    █████     █    ███░░██████████████████████░             ',
+\ '    █  ████░  █    ███   ░████████████████████████░         ',
+\ '    █   █████ █    ███████░  ██████████████████████░        ',
+\ '    █        ██    ███░         ████████████████████        ',
+\ '   ███       ██  ░░████████░     ░███████████████████       ',
+\ '                                   ██████████████████       ',
+\ '                     █████████░   ░███████████████████      ',
+\ '                       ███   ████  ░██░  ████████████░      ',
+\ '                       ███   ░███    ██░  ████████████      ',
+\ '                       ███░████░     ░██░  ██████████░      ',
+\ '                       ███ ███░       ░██░ ██ ░███████  ',
+\ '                       ███   ████      ░███    ██████░  ',
+\ '                       ███    ████░     ░█      ░████░  ',
+\ '                                                  ███   ',
+\ '                                                   ░█░  ',
+\]
+
+" }}}
+" }}}
+"end
+"}}}
+"
+
+"}}}
 
  "UI liuchengxu/vim-which-key {{{
 let g:maplocalleader = ","
@@ -542,14 +590,14 @@ autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
 
 
 "JavaScript neoclide/coc.nvim  {{{
-let g:coc_global_extensions = [
-  \ 'coc-snippets',
-  \ 'coc-pairs',
-  \ 'coc-tsserver',
-  \ 'coc-eslint',
-  \ 'coc-prettier',
-  \ 'coc-json',
-  \ ]
+"let g:coc_global_extensions = [
+"  \ 'coc-snippets',
+"  \ 'coc-pairs',
+"  \ 'coc-tsserver',
+"  \ 'coc-eslint',
+"  \ 'coc-prettier',
+"  \ 'coc-json',
+"  \ ]
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
@@ -694,6 +742,24 @@ if has("persistent_undo")
 endif
 " }}}
 
+
+"EDTOR plasticboy/vim-markdown {{{
+
+let g:vim_markdown_math = 1
+
+" }}}
+
+"EDTOR mzlogin/vim-markdown-toc {{{
+
+"Delet unnecessary under structure of generated toc
+function RToc()
+    exe "/-toc .* -->"
+    let lstart=line('.')
+    exe "/-toc -->"
+    let lnum=line('.')
+    execute lstart.",".lnum."g/           /d"
+endfunction
+"}}}
 
 
 "UI severin-lemaignan/vim-minimap {{{
