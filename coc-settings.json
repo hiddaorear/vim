@@ -4,31 +4,25 @@
     "typescript.suggestionActions.enabled": false,
     "coc.preferences.extensionUpdateCheck": "never",
 
-    // Run prettier (and others)
-    "coc.preferences.formatOnSaveFiletypes": [
-        "css",
-        "markdown",
-        "Markdown",
-        "javascript",
-        "javascriptreact",
-        "typescript",
-        "typescriptreact"
-    ],
-
     "list.maxHeight": 1,
     "suggest.snippetIndicator": "",
-    "suggest.noselect": true,
     "diagnostic.errorSign": "✖",
     "diagnostic.warningSign": "⚠",
     "diagnostic.infoSign": "ℹ",
     "diagnostic.hintSign": "➤",
     "diagnostic.checkCurrentLine": true,
-    "languageserver": {
-        "golang": {
-            "command": "gopls",
-            "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
-            "filetypes": ["go"],
-            "trace.server": "verbose"
-        }
-    }
+    "suggest.noselect": false,
+
+    "prettier.singleQuote": true,
+
+    // Run prettier (and others)
+    "coc.preferences.formatOnSaveFiletypes": [
+        "css",
+        "json",
+        "typescript.tsx",
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact"
+    ]
 }
