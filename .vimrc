@@ -74,8 +74,6 @@ Plug 'hiddaorear/vim-snippets'
 
 
 " JavaScript
-Plug 'leafgarland/typescript-vim'
-Plug 'peitalin/vim-jsx-typescript'
 
 " mode
 Plug 'jceb/vim-orgmode' " org-mode
@@ -195,7 +193,6 @@ set cmdheight=1 " 命令行高度
 " Format {{{
 set autoindent
 set smartindent
-set expandtab
 set foldenable " 开始折叠
 set foldmethod=syntax
 set foldcolumn=0 " 折叠区域的宽度
@@ -206,7 +203,7 @@ nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc':'zo')<CR>   " 用空格�
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
-
+set expandtab ts=4 sw=4 ai
 " }}}
 
 
@@ -568,11 +565,6 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsEditSplit="vertical"
 " }}}
 
-
-"JavaScript leafgarland/typescript-vim {{{
-"set filetypes as typescript.tsx
-autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
-"}}}
 
 
 "EDTOR mbbill/undotree {{{
