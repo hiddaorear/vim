@@ -72,6 +72,8 @@ Plug 'dense-analysis/ale'
 Plug 'SirVer/ultisnips'
 Plug 'hiddaorear/vim-snippets'
 
+Plug 'voldikss/vim-floaterm'
+
 
 " JavaScript
 
@@ -563,6 +565,19 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
+" }}}
+
+
+
+" CODING  voldikss/vim-floaterm {{{
+
+let g:floaterm_keymap_new = '<Leader>fn'
+
+" Set floaterm window's background to black
+hi FloatermNF guibg=black
+" Set floating window border line color to cyan, and background to orange
+hi FloatermBorderNF guibg=orange guifg=cyan
+
 " }}}
 
 
