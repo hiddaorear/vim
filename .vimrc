@@ -74,13 +74,18 @@ Plug 'hiddaorear/vim-snippets'
 
 Plug 'voldikss/vim-floaterm'
 
+Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
+
 
 " JavaScript
+
+" rust
+
+Plug 'rust-lang/rust.vim'
 
 " mode
 Plug 'jceb/vim-orgmode' " org-mode
 Plug 'tpope/vim-speeddating' " vim-orgmode的辅助插件
-
 
 call plug#end()
 " }}}}}
@@ -578,6 +583,12 @@ hi FloatermNF guibg=black
 " Set floating window border line color to cyan, and background to orange
 hi FloatermBorderNF guibg=orange guifg=cyan
 
+" }}}
+
+
+" CODING  rust-lang/rust.vim {{{
+let g:rust_clip_command = 'pbcopy'
+let g:rustfmt_autosave = 1
 " }}}
 
 
