@@ -60,7 +60,6 @@ Plug 'junegunn/goyo.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
 Plug 'chrisbra/NrrwRgn'
-Plug 'godlygeek/tabular' 
 Plug 'plasticboy/vim-markdown'
 Plug 'mzlogin/vim-markdown-toc'
 
@@ -254,7 +253,7 @@ nnoremap <Leader>t :NERDTreeToggle<CR>
 nnoremap <Leader>e :Ex<CR>
 
 " fzf
-noremap <leader>ll :Files 
+noremap <leader>ll :Files
 noremap <leader>b :Buffers<CR>
 noremap <leader>fg :GFiles?<CR>
 " 自定义支持路径搜索 Rg string path 的意a
@@ -289,39 +288,8 @@ let g:Powerline_symbols = 'fancy'
 " UI mhinz/vim-startify {{{
 let g:startify_files_number = 10
 "Open Statify
-nnoremap <silent> <F3> :Startify <CR> 
+nnoremap <silent> <F3> :Startify <CR>
 
-" Welcome Page{{{
-
-let g:startify_custom_header = [
-\ '                             ███████████               ',
-\ '                          ███████████████████               ',
-\ '                         ███████████████████                ',
-\ '                         ██████████████████████░            ',
-\ '           ██░           █████████████████████████░░        ',
-\ '            ░██░        ███████████████████████████░       ',
-\ '               ░██░    █████████████████████████████████░   ',
-\ '                 ████████████████████████████████████████░  ',
-\ '                    ███████████████████████████████████░    ',
-\ '   █████     ███  ░█████████████████████████░░░             ',
-\ '    █████     █    ███░░██████████████████████░             ',
-\ '    █  ████░  █    ███   ░████████████████████████░         ',
-\ '    █   █████ █    ███████░  ██████████████████████░        ',
-\ '    █        ██    ███░         ████████████████████        ',
-\ '   ███       ██  ░░████████░     ░███████████████████       ',
-\ '                                   ██████████████████       ',
-\ '                     █████████░   ░███████████████████      ',
-\ '                       ███   ████  ░██░  ████████████░      ',
-\ '                       ███   ░███    ██░  ████████████      ',
-\ '                       ███░████░     ░██░  ██████████░      ',
-\ '                       ███ ███░       ░██░ ██ ░███████  ',
-\ '                       ███   ████      ░███    ██████░  ',
-\ '                       ███    ████░     ░█      ░████░  ',
-\ '                                                  ███   ',
-\ '                                                   ░█░  ',
-\]
-
-" }}}
 " }}}
 "end
 "}}}
@@ -744,3 +712,20 @@ set statusline+=%6*[\ %{toupper(g:currentmode[mode()])}] " User6 Current mode
 set statusline+=%6*\ %P\ %* " User6
 
 " }}}} statusline end
+
+
+" Function {{{{{
+
+" Remove trailing whitespace when writing a buffer, but not for diff files.
+function! RemoveTrailingWhitespace()
+    if &ft != "diff"
+        let b:curcol = col(".")
+        let b:curline = line(".")
+        silent! %s/\s\+$//
+        silent! %s/\(\s*\n\)\+\%$//
+        call cursor(b:curline, b:curcol)
+    endif
+endfunction
+autocmd BufWritePre * call RemoveTrailingWhitespace()
+
+" }}}}}
